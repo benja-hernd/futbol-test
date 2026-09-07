@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUE LOCK — TEST DE RECLUTAMIENTO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#05070c;
+  --panel:#0c1120;
+  --panel-2:#111832;
+  --line:#232c47;
+  --ego-blue:#2d5bff;
+  --ego-cyan:#4ff0ff;
+  --ego-red:#ff2b4d;
+  --white:#eef2ff;
+  --gray:#7684a8;
+  --gold:#ffce3d;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--void);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(45,91,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,91,255,.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  pointer-events:none;
+  z-index:0;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+}
+.wrap{position:relative; z-index:1; max-width:920px; margin:0 auto; padding:24px 20px 80px;}
+
+/* ---------- topbar ---------- */
+.topbar{display:flex; align-items:center; justify-content:space-between; padding:18px 4px 36px; border-bottom:1px solid var(--line); margin-bottom:40px;}
+.logo{
+  font-family:'Anton', sans-serif;
+  font-size:26px;
+  letter-spacing:2px;
+  display:flex; align-items:center; gap:10px;
+}
+.logo .lock-icon{
+  width:26px; height:30px;
+  border:3px solid var(--ego-cyan);
+  border-radius:4px 4px 0 0;
+  position:relative;
+  clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);
+}
+.logo .lock-icon::before{
+  content:"";
+  position:absolute; top:-16px; left:2px;
+  width:16px; height:16px;
+  border:3px solid var(--ego-cyan);
+  border-bottom:none;
+  border-radius:50% 50% 0 0;
+}
+.tag-id{font-family:'Barlow Condensed'; font-size:13px; letter-spacing:3px; color:var(--gray); text-transform:uppercase;}
+
+/* ---------- hero / intro ---------- */
+.screen{display:none; animation:fadeUp .5s ease both;}
+.screen.active{display:block;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+
+.eyebrow{
+  font-family:'Barlow Condensed'; font-weight:700;
+  color:var(--ego-cyan); letter-spacing:4px; font-size:14px;
+  text-transform:uppercase; margin-bottom:14px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow::before{content:""; width:26px; height:2px; background:var(--ego-cyan); display:inline-block;}
+
+h1.hero-title{
+  font-family:'Anton', sans-serif;
+  font-size:clamp(38px, 8vw, 74px);
+  line-height:0.95;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+h1.hero-title span{color:var(--ego-blue); -webkit-text-stroke:2px var(--ego-cyan); color:transparent;}
+
+.ego-card{
+  background:linear-gradient(155deg, var(--panel-2), var(--panel));
+  border:1px solid var(--line);
+  border-left:4px solid var(--ego-red);
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 96% 100%, 0 100%);
+  padding:28px 26px;
+  margin:26px 0 34px;
+  position:relative;
+}
+.ego-avatar{
+  width:58px; height:58px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #2c3a66, #0b0f1c);
+  border:2px solid var(--ego-red);
+  flex:none;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Anton'; font-size:22px; color:var(--ego-red);
+}
+.ego-header{display:flex; align-items:center; gap:14px; margin-bottom:14px;}
+.ego-name{font-family:'Barlow Condensed'; font-weight:800; font-size:19px; letter-spacing:1px;}
+.ego-role{font-size:12px; color:var(--gray); letter-spacing:2px; text-transform:uppercase;}
+.ego-quote{font-size:16.5px; line-height:1.65; color:#d7deff;}
+.ego-quote b{color:var(--ego-cyan);}
+
+.stat-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+.stat-chip{
+  border:1px solid var(--line); background:var(--panel);
+  padding:10px 16px; font-family:'Barlow Condensed'; letter-spacing:1px;
+  font-size:14px; color:var(--gray);
+}
+.stat-chip b{color:var(--white); font-weight:700;}
+
+.btn{
+  font-family:'Barlow Condensed'; font-weight:800; letter-spacing:2px;
+  text-transform:uppercase; font-size:17px;
+  background:var(--ego-blue); color:var(--white);
+  border:none; padding:17px 34px;
+  cursor:pointer;
+  clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+  box-shadow:0 0 0 rgba(79,240,255,0);
+}
+.btn:hover{background:var(--ego-cyan); color:var(--void); transform:translateX(2px); box-shadow:0 0 24px rgba(79,240,255,.35);}
+.btn:active{transform:translateX(0) scale(.98);}
+.btn-ghost{
+  background:transparent; border:1px solid var(--line); color:var(--gray);
+  clip-path:none; padding:14px 26px;
+}
+.btn-ghost:hover{border-color:var(--ego-cyan); color:var(--ego-cyan); box-shadow:none;}
+
+/* ---------- quiz ---------- */
+.progress-track{
+  height:8px; background:var(--panel); border:1px solid var(--line);
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  overflow:hidden; margin-bottom:10px;
+}
+.progress-fill{height:100%; background:linear-gradient(90deg, var(--ego-blue), var(--ego-cyan)); width:0%; transition:width .4s ease;}
+.progress-label{
+  font-family:'Barlow Condensed'; letter-spacing:2px; font-size:13px; color:var(--gray);
+  display:flex; justify-content:space-between; margin-bottom:38px; text-transform:uppercase;
+}
+.progress-label b{color:var(--ego-cyan);}
+
+.q-number{
+  font-family:'Anton'; font-size:15px; color:var(--ego-red);
+  letter-spacing:3px; margin-bottom:10px;
+}
+.q-text{
+  font-family:'Anton'; font-size:clamp(24px,4.2vw,34px);
+  line-height:1.15; margin-bottom:30px; text-transform:uppercase; letter-spacing:.5px;
+}
+.options{display:flex; flex-direction:column; gap:12px;}
+.option{
+  background:var(--panel); border:1px solid var(--line);
+  padding:18px 22px; text-align:left; color:var(--white);
+  font-family:'Inter'; font-size:15.5px; font-weight:500;
+  cursor:pointer; position:relative; overflow:hidden;
+  transition:border-color .15s ease, transform .12s ease, background .15s ease;
+  display:flex; align-items:center; gap:14px;
+}
+.option .opt-letter{
+  font-family:'Anton'; font-size:14px; color:var(--gray);
+  width:26px; height:26px; border:1px solid var(--line); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; flex:none;
+  transition:all .15s ease;
+}
+.option:hover{border-color:var(--ego-blue); transform:translateX(4px); background:var(--panel-2);}
+.option:hover .opt-letter{border-color:var(--ego-cyan); color:var(--ego-cyan);}
+.option:active{transform:translateX(2px) scale(.995);}
+
+/* ---------- result ---------- */
+.result-top{text-align:center; margin-bottom:8px;}
+.result-eyebrow{
+  font-family:'Barlow Condensed'; letter-spacing:4px; color:var(--ego-red); font-weight:800;
+  font-size:14px; text-transform:uppercase;
+}
+.result-card{
+  margin-top:22px;
+  border:1px solid var(--line);
+  background:linear-gradient(165deg, var(--panel-2), var(--panel) 60%);
+  clip-path: polygon(0 22px, 22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+  padding:44px 34px;
+  position:relative;
+  overflow:hidden;
+}
+.result-card::after{
+  content:"";
+  position:absolute; top:-40%; right:-20%; width:60%; height:160%;
+  background:radial-gradient(circle, rgba(45,91,255,.18), transparent 60%);
+  pointer-events:none;
+}
+.result-rank{
+  font-family:'Anton'; font-size:15px; color:var(--gray); letter-spacing:3px; margin-bottom:6px;
+}
+.result-name{
+  font-family:'Anton'; font-size:clamp(32px,6.4vw,54px); line-height:1;
+  text-transform:uppercase; margin-bottom:18px; color:var(--white);
+  text-shadow:0 0 26px rgba(79,240,255,.25);
+}
+.result-name.legend{color:var(--gold); text-shadow:0 0 30px rgba(255,206,61,.5);}
+.result-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--ego-blue); color:var(--ego-cyan);
+  font-family:'Barlow Condensed'; font-weight:700; letter-spacing:2px; font-size:12.5px;
+  padding:6px 14px; text-transform:uppercase; margin-bottom:22px;
+}
+.result-desc{font-size:16.5px; line-height:1.75; color:#d7deff; margin-bottom:26px;}
+.result-desc b{color:var(--white);}
+.ego-verdict{
+  border-top:1px dashed var(--line); padding-top:20px; margin-top:20px;
+  font-family:'Barlow Condensed'; font-size:16px; color:var(--gray); line-height:1.6;
+}
+.ego-verdict b{color:var(--ego-red);}
+
+.meter{margin-top:26px;}
+.meter-label{display:flex; justify-content:space-between; font-family:'Barlow Condensed'; font-size:13px; letter-spacing:1.5px; color:var(--gray); margin-bottom:8px; text-transform:uppercase;}
+.meter-track{height:10px; background:var(--void); border:1px solid var(--line); overflow:hidden;}
+.meter-fill{height:100%; background:linear-gradient(90deg, var(--ego-red), var(--gold)); width:0%; transition:width 1s ease;}
+
+.result-actions{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+
+.roster{margin-top:70px;}
+.roster-title{font-family:'Anton'; font-size:15px; letter-spacing:3px; color:var(--gray); margin-bottom:16px; text-transform:uppercase;}
+.roster-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px;}
+.roster-item{
+  border:1px solid var(--line); background:var(--panel); padding:12px 14px;
+  font-family:'Barlow Condensed'; font-size:13.5px; color:var(--gray); letter-spacing:.5px;
+  transition:all .15s ease;
+}
+.roster-item.current{border-color:var(--ego-cyan); color:var(--ego-cyan); background:var(--panel-2);}
+
+footer{
+  text-align:center; margin-top:70px; padding-top:24px; border-top:1px solid var(--line);
+  font-family:'Barlow Condensed'; font-size:12.5px; letter-spacing:2px; color:var(--gray); text-transform:uppercase;
+}
+
+@media (max-width:520px){
+  .ego-card{padding:22px 18px;}
+  .result-card{padding:34px 22px;}
+  .result-actions{flex-direction:column;}
+  .btn, .btn-ghost{width:100%; text-align:center;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="logo"><span class="lock-icon"></span>BLUE LOCK</div>
+    <div class="tag-id">PROGRAMA DE ELIMINACIÓN Nº 0947</div>
+  </div>
+
+  <!-- ================= INTRO ================= -->
+  <section class="screen active" id="screen-intro">
+    <div class="eyebrow">Evaluación de aptitud futbolística</div>
+    <h1 class="hero-title">¿QUÉ CLASE<br>DE <span>JUGADOR</span><br>SOS VOS?</h1>
+
+    <div class="ego-card">
+      <div class="ego-header">
+        <div class="ego-avatar">E</div>
+        <div>
+          <div class="ego-name">EGO JINPACHI</div>
+          <div class="ego-role">Director del programa Blue Lock</div>
+        </div>
+      </div>
+      <p class="ego-quote">
+        Escuchame bien, porque no lo voy a repetir. No me interesa tu esfuerzo, no me interesa tu equipo,
+        no me interesa si "diste todo". Acá adentro solo importa una cosa: <b>¿tenés lo que hay que tener
+        para ser el único delantero que Japón necesita?</b> Vas a responder 10 preguntas. Nada de trampas,
+        nada de excusas. Al final vas a saber, con nombre y apellido, qué clase de jugador sos realmente.
+        La mayoría no va a gustarles lo que encuentren. Así de simple.
+      </p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-chip"><b>10</b> preguntas</div>
+      <div class="stat-chip"><b>12</b> perfiles posibles</div>
+      <div class="stat-chip"><b>1</b> de cada 12 es delantero estrella</div>
+      <div class="stat-chip">Tiempo: <b>~3 min</b></div>
+    </div>
+
+    <button class="btn" onclick="startQuiz()">ENTRAR A LA INSTALACIÓN →</button>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="screen" id="screen-quiz">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label"><span>EVALUACIÓN EN CURSO</span><span><b id="qIndex">1</b>/10</span></div>
+
+    <div class="q-number" id="qNumber">PREGUNTA 01</div>
+    <h2 class="q-text" id="qText">—</h2>
+    <div class="options" id="qOptions"></div>
+  </section>
+
+  <!-- ================= RESULT ================= -->
+  <section class="screen" id="screen-result">
+    <div class="result-top">
+      <div class="result-eyebrow">Evaluación finalizada</div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-rank" id="resRank">PERFIL DETECTADO</div>
+      <div class="result-name" id="resName">—</div>
+      <div class="result-badge" id="resBadge">—</div>
+      <p class="result-desc" id="resDesc">—</p>
+
+      <div class="meter">
+        <div class="meter-label"><span>NIVEL DE EGOÍSMO</span><span id="meterPct">0%</span></div>
+        <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
+      </div>
+
+      <div class="ego-verdict" id="egoVerdict"><b>EGO:</b> —</div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn" onclick="restartQuiz()">VOLVER A EVALUARME</button>
+      <button class="btn btn-ghost" onclick="scrollToRoster()">VER LOS 12 PERFILES</button>
+    </div>
+
+    <div class="roster" id="roster">
+      <div class="roster-title">Plantel completo — Blue Lock</div>
+      <div class="roster-grid" id="rosterGrid"></div>
+    </div>
+  </section>
+
+  <footer>Blue Lock — Test de Reclutamiento no oficial · Hecho por un fan · No afiliado a Kodansha / Muneyuki Kaneshiro</footer>
+</div>
+
+<script>
+/* ============ DATOS DE JUGADORES ============ */
+const PLAYERS = {
+  burro: {
+    name: "El Burro",
+    badge: "Fuerza bruta sin filtro",
+    ego: 30,
+    desc: "Corrés como si el partido se ganara al que más se cansa. Tenés motor, pulmón y ganas de sobra, pero la pelota parece tener vida propia cada vez que te la dan. En Blue Lock a esto lo llaman 'potencial físico desperdiciado': todo el cuerpo de un animal de tracción y las manos de alguien que nunca tocó un balón.",
+    verdict: "Con ese físico y cero técnica sos un arma sin gatillo. O aprendés a pensar la jugada, o te vamos a usar de sparring para que los demás practiquen caños."
+  },
+  comebanco: {
+    name: "El Come Banco",
+    badge: "Suplente eterno",
+    ego: 15,
+    desc: "Tu verdadero talento es calentar el asiento. Entrenás igual que todos, escuchás cada charla técnica con atención militar, y después el domingo mirás los 90 minutos desde la mejor butaca del estadio. No es que seas malo: es que siempre hay alguien, un poquito mejor, un poquito más decidido, que te saca el lugar.",
+    verdict: "Acá no hay banco de suplentes, infeliz. Acá el que no ataca, desaparece. Andá pensando otra excusa, porque esa ya no te la voy a comprar."
+  },
+  picaymuere: {
+    name: "El Que Pica y Muere",
+    badge: "Todo pólvora, poco fuego",
+    ego: 45,
+    desc: "Los primeros 15 minutos sos el mejor jugador de la cancha. Presionás, gritás, corrés cada pelota como si fuera la final del mundo. Y después... nada. El tanque se vacía y terminás caminando mientras te pasan por al lado. Explotás fuerte y te apagás más rápido todavía.",
+    verdict: "Tenés la chispa que a otros les falta, pero una chispa sola no prende una guerra. Si aprendés a dosificarte, sos peligroso. Si no, sos fuego artificial: lindo, ruidoso e inútil a los 20 minutos."
+  },
+  pateademasiado: {
+    name: "El Que Patea Demasiado",
+    badge: "Ego sin puntería",
+    ego: 85,
+    desc: "Tenés un solo plan de juego: la pelota me llega, la pelota se va al arco. No importa el ángulo, la marca, ni que haya un compañero solo y mejor plantado. Rifás cada pelota como si fuera la última que vas a tocar en tu vida. A veces entra. La mayoría de las veces, el arquero ni se tira.",
+    verdict: "Me gusta tu hambre, pero el hambre sin cabeza es solo desperdicio. Un buen delantero no tira más: tira mejor. Aprendé la diferencia o vas a terminar regalando pelotas toda tu carrera."
+  },
+  pateaparaelotrolado: {
+    name: "El Que Patea Para el Otro Lado",
+    badge: "El desastre andante",
+    ego: 5,
+    desc: "Bajo presión, tu cuerpo hace lo que quiere. Definiciones que sobran, pases que se convierten en centros al arco propio, un gol cantado que termina en córner para el rival por vos mismo. No es mala suerte: es que en el momento clave, algo en tu cabeza se desconecta del todo.",
+    verdict: "Sos la prueba de que el talento físico no sirve de nada si el cerebro se apaga con la presión. O trabajás la cabeza, o vas a seguir siendo el chiste del vestuario."
+  },
+  estrella: {
+    name: "El Delantero Estrella",
+    badge: "El único bueno de verdad",
+    ego: 100,
+    desc: "Frialdad para definir, hambre para pedir la pelota, y la certeza absoluta de que la cancha te pertenece. No te importa caerle bien a nadie: te importa el resultado, y el resultado siempre es gol. Sos exactamente lo que Blue Lock busca desde el primer día: un monstruo con nombre propio.",
+    verdict: "Por fin. Después de tanto descarte, aparece uno que entiende de qué se trata esto. No sos parte de un equipo: el equipo es una herramienta que usás para llegar al arco. Ahora demostrámelo cada noventa minutos."
+  },
+  arquero: {
+    name: "El Que Mandan al Arco",
+    badge: "Reconvertido a la fuerza",
+    ego: 20,
+    desc: "Empezaste jugando de todo menos de arquero, hasta que un día, sin preguntarte nada, te pusieron los guantes. Y ahí te quedaste. No fue vocación, fue necesidad del equipo, y con el tiempo terminaste resignado a mirar el partido de espaldas al gol que soñabas hacer.",
+    verdict: "Terminaste bajo los tres palos por descarte, no por deseo. Algún día alguien te va a tener que preguntar qué querías ser vos, no lo que el equipo necesitaba. Mientras tanto, atajá."
+  },
+  malperdedor: {
+    name: "El Que No Sabe Perder",
+    badge: "Orgullo sin freno",
+    ego: 60,
+    desc: "Un partido amistoso se te convierte en cuestión de vida o muerte. Discutís cada fallo, culpás al árbitro, al pasto, al viento, a cualquiera menos a vos. Perder no te enseña nada porque no llegás a procesarlo: solo te enoja. Y ese enojo, la mayoría de las veces, te hace jugar peor.",
+    verdict: "Odiar perder está bien. Es casi un requisito acá adentro. El problema es cuando ese odio te ciega en vez de afilarte. Convertí la bronca en gol, no en excusa."
+  },
+  antifutbol: {
+    name: "El Antifútbol",
+    badge: "Juega para que nadie juegue",
+    ego: 55,
+    desc: "Tu especialidad no es crear, es destruir. Cortás circuitos, frenás jugadas con una entrada límite, hacés tiempo cuando vas ganando por uno. El árbitro te tiene fichado, el rival te odia, y en el fondo sabés que el folclor del partido lo generás vos.",
+    verdict: "Sabés jugar sucio mejor que la mayoría juega limpio, y eso es un arma. Pero a mí no me interesa el que evita que jueguen los demás: me interesa el que juega mejor que todos. Elegí de qué lado de esa frase querés estar."
+  },
+  lesionado: {
+    name: "El Que Se Lesiona Solo",
+    badge: "Cristal de laboratorio",
+    ego: 25,
+    desc: "Basta con que tengas dos semanas seguidas de buen nivel para que aparezca una molestia de la nada. Un tironcito, una recaída, una torcedura en el momento menos pensado. El cuerpo parece boicotearte justo cuando las cosas empiezan a salir bien.",
+    verdict: "No sé si es el cuerpo o es la cabeza la que no aguanta la exigencia. Lo que sí sé es que un jugador que no está en la cancha, no existe para mí. Andá a fisioterapia y volvé entero, si podés."
+  },
+  showman: {
+    name: "El Que Juega Para la Tribuna",
+    badge: "Más show que gol",
+    ego: 70,
+    desc: "Cada movimiento tuyo tiene un ojo puesto en quién te está mirando. Un caño innecesario, una vaselina en un dos contra cero fácil, un festejo coreografiado para el que hiciste con el arco vacío. El resultado, muchas veces, pasa a segundo plano frente al aplauso.",
+    verdict: "El circo está bien cuando gana el circo. El problema es cuando el show te importa más que el marcador. A la gente se la conquista ganando, no posando."
+  },
+  nuncadefine: {
+    name: "El Que Nunca Define",
+    badge: "El miedo al error",
+    ego: 10,
+    desc: "Te llega la pelota en posición de gol y la primera reacción es buscar a alguien a quien dársela. No por generosidad: por miedo. Miedo a errar, a que te critiquen, a cargar con la responsabilidad del fallo. Preferís mil veces ser cómplice de un error ajeno que protagonista de uno propio.",
+    verdict: "El miedo a fallar es lo que te está matando, no la falta de técnica. Acá adentro, el que no se anima a errar, jamás va a anotar. Definí. Aunque sea mal. Definí."
+  }
+};
+
+const PLAYER_ORDER = ["estrella","pateademasiado","antifutbol","malperdedor","showman","picaymuere",
+  "arquero","burro","lesionado","comebanco","nuncadefine","pateaparaelotrolado"];
+
+/* ============ PREGUNTAS ============ */
+/* Cada opción suma puntos a uno o dos perfiles. "estrella" aparece pocas veces a propósito. */
+const QUESTIONS = [
+  {
+    q: "En un picado de amigos, alguien te grita que estás jugando mal. ¿Qué hacés?",
+    opts: [
+      {t:"Le contesto peor de lo que me gritó, y sigo discutiendo tres jugadas después.", p:{malperdedor:3}},
+      {t:"Me río, le pido perdón al equipo y sigo jugando igual de mal.", p:{comebanco:3}},
+      {t:"No le contesto nada, pero en la próxima jugada le hago un caño innecesario.", p:{showman:2, malperdedor:1}},
+      {t:"Tiene razón. Cambio algo puntual y en dos jugadas resuelvo el partido.", p:{estrella:3}},
+      {t:"Empiezo a entrarle más fuerte al que me gritó en la próxima disputa.", p:{antifutbol:3}},
+    ]
+  },
+  {
+    q: "Te queda un mano a mano con el arquero, sin ángulo, en el último minuto.",
+    opts: [
+      {t:"Le pego con toda el alma al primer palo. Adentro o afuera, así soy yo.", p:{pateademasiado:3}},
+      {t:"Amago una vez de más, pierdo el tiempo justo y me la sacan.", p:{picaymuere:2, showman:1}},
+      {t:"Mando el pase atrás para que defina uno mejor ubicado.", p:{nuncadefine:3}},
+      {t:"Defino con la calma de quien ya sabe que va a entrar.", p:{estrella:3}},
+      {t:"Piso mal, me tuerzo el tobillo justo en la carrera y no llego.", p:{lesionado:3}},
+    ]
+  },
+  {
+    q: "El técnico arma el equipo titular y tu nombre no aparece en la lista.",
+    opts: [
+      {t:"Lo esperaba. Preparo la botella de agua para el banco, otra vez.", p:{comebanco:3}},
+      {t:"Voy a reclamarle el puesto sin importar lo que me responda.", p:{malperdedor:2, estrella:1}},
+      {t:"Me entero y de la bronca digo que me duele algo para no ir.", p:{lesionado:2, comebanco:1}},
+      {t:"Ni me sorprende: total, siempre termino atajando cuando falta alguien.", p:{arquero:3}},
+      {t:"Sigo entrenando el doble, en silencio, hasta que no les quede otra.", p:{burro:2, estrella:1}},
+    ]
+  },
+  {
+    q: "Vas perdiendo 3 a 0 al entretiempo. ¿Qué pasa por tu cabeza?",
+    opts: [
+      {t:"Que la culpa es del árbitro, de la cancha, del clima. De cualquiera menos mía.", p:{malperdedor:3}},
+      {t:"Que hay que empezar a jugar más 'a la que te criaste', total ya está perdido.", p:{antifutbol:2, burro:1}},
+      {t:"Que todavía hay 45 minutos y yo solo puedo dar vuelta esto.", p:{estrella:3}},
+      {t:"Que me quiero ir directamente a los vestuarios y dejar de sufrir.", p:{comebanco:2, picaymuere:1}},
+      {t:"Que voy a correr el doble, aunque eso signifique no llegar al final.", p:{picaymuere:3}},
+    ]
+  },
+  {
+    q: "Un compañero se equivoca feo y te regala un gol al rival. ¿Reacción?",
+    opts: [
+      {t:"Le hago un gesto de reproche que se ve desde la tribuna.", p:{malperdedor:2, showman:1}},
+      {t:"Nada, sigo mi carril, esas cosas no me sacan de none.", p:{estrella:2, burro:1}},
+      {t:"Uso ese momento para bajar el ritmo y frenar el partido como sea.", p:{antifutbol:3}},
+      {t:"Me pongo tan mal que se me va el foco el resto del partido.", p:{lesionado:1, picaymuere:2}},
+      {t:"Pienso que si yo hubiera estado ahí, no pasaba.", p:{nuncadefine:1, malperdedor:1, estrella:1}},
+    ]
+  },
+  {
+    q: "Elegí la frase que más se parece a algo que dirías después de un partido.",
+    opts: [
+      {t:"'Corrí muchísimo, di todo lo que tenía.' (aunque no toqué una pelota limpia)", p:{burro:3}},
+      {t:"'Hice lo que pude desde el banco... alentando.'", p:{comebanco:3}},
+      {t:"'Si el árbitro no me cobraba esa, otro era el resultado.'", p:{antifutbol:2, malperdedor:1}},
+      {t:"'Hice tres goles. ¿Qué más querés que te diga?'", p:{estrella:3}},
+      {t:"'Estuve bárbaro los primeros veinte minutos, después no sé qué pasó.'", p:{picaymuere:3}},
+    ]
+  },
+  {
+    q: "Tenés que patear un penal decisivo. ¿Cómo llegás a la pelota?",
+    opts: [
+      {t:"Pidiéndole a otro que la patee él, yo no quiero cargar con eso.", p:{nuncadefine:3}},
+      {t:"Con el pulso disparado, pero convencido de que va a entrar.", p:{estrella:2, picaymuere:1}},
+      {t:"Con un dolor extraño en la pierna que apareció de la nada.", p:{lesionado:3}},
+      {t:"Pateando fortísimo, sin mirar demasiado dónde, con toda la potencia que tengo.", p:{burro:2, pateademasiado:1}},
+      {t:"Amagando una gambeta al arquero antes de patear, para la tribuna.", p:{showman:3}},
+    ]
+  },
+  {
+    q: "¿Qué comentario de la gente que te conoce se repite más seguido?",
+    opts: [
+      {t:"'Tiene un físico impresionante, lástima que no sabe qué hacer con la pelota.'", p:{burro:3}},
+      {t:"'Siempre entrena bien pero el domingo nunca lo ponen.'", p:{comebanco:3}},
+      {t:"'Cuando se calienta, se le va el partido de las manos.'", p:{malperdedor:3}},
+      {t:"'Cada vez que agarra la pelota, algo especial pasa.'", p:{estrella:3}},
+      {t:"'Justo cuando estaba jugando bien, se lesionó otra vez.'", p:{lesionado:3}},
+    ]
+  },
+  {
+    q: "Tu equipo va ganando 1 a 0 faltando cinco minutos. ¿Tu prioridad?",
+    opts: [
+      {t:"Buscar cualquier excusa para tirarme al piso y hacer tiempo.", p:{antifutbol:3}},
+      {t:"Seguir yendo al frente, buscando el segundo para liquidarlo.", p:{estrella:3}},
+      {t:"Pedir el cambio, porque ya no me quedan piernas.", p:{picaymuere:2, lesionado:1}},
+      {t:"Meterme atrás a correr cada pelota como si me fuera la vida.", p:{burro:3}},
+      {t:"Empezar a mirar el reloj más que la pelota, nervioso por perderlo.", p:{malperdedor:2, nuncadefine:1}},
+    ]
+  },
+  {
+    q: "Última: si tu DT te mira a los ojos y te pregunta '¿para qué jugás al fútbol?', ¿qué le contestás?",
+    opts: [
+      {t:"'Para que no me digan que no puse el cuerpo.'", p:{burro:2, comebanco:1}},
+      {t:"'Para ser el mejor. El único. No hay otra respuesta.'", p:{estrella:3}},
+      {t:"'Para que la gente hable de mí después del partido.'", p:{showman:3}},
+      {t:"'Para no perder. Punto. Lo demás no me importa.'", p:{malperdedor:2, antifutbol:1}},
+      {t:"La verdad, todavía no lo sé del todo.", p:{nuncadefine:3}},
+    ]
+  }
+];
+
+/* ============ ESTADO ============ */
+let currentQ = 0;
+let scores = {};
+Object.keys(PLAYERS).forEach(k => scores[k] = 0);
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function startQuiz(){
+  currentQ = 0;
+  Object.keys(PLAYERS).forEach(k => scores[k] = 0);
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const data = QUESTIONS[currentQ];
+  document.getElementById('qIndex').textContent = currentQ + 1;
+  document.getElementById('qNumber').textContent = 'PREGUNTA ' + String(currentQ+1).padStart(2,'0');
+  document.getElementById('qText').textContent = data.q;
+  document.getElementById('progressFill').style.width = ((currentQ)/QUESTIONS.length*100) + '%';
+
+  const optsWrap = document.getElementById('qOptions');
+  optsWrap.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+  data.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${opt.t}</span>`;
+    btn.onclick = () => selectOption(opt.p);
+    optsWrap.appendChild(btn);
+  });
+}
+
+function selectOption(points){
+  Object.keys(points).forEach(key => { scores[key] += points[key]; });
+  currentQ++;
+  if(currentQ < QUESTIONS.length){
+    renderQuestion();
+  } else {
+    document.getElementById('progressFill').style.width = '100%';
+    setTimeout(showResult, 250);
+  }
+}
+
+function showResult(){
+  let best = Object.keys(scores)[0];
+  Object.keys(scores).forEach(k => { if(scores[k] > scores[best]) best = k; });
+  // desempate: si hay empate exacto, elegimos entre los empatados al azar
+  const maxScore = scores[best];
+  const tied = Object.keys(scores).filter(k => scores[k] === maxScore);
+  if(tied.length > 1){ best = tied[Math.floor(Math.random()*tied.length)]; }
+
+  const player = PLAYERS[best];
+  document.getElementById('resName').textContent = player.name;
+  document.getElementById('resName').className = 'result-name' + (best === 'estrella' ? ' legend' : '');
+  document.getElementById('resBadge').textContent = player.badge;
+  document.getElementById('resDesc').innerHTML = player.desc;
+  document.getElementById('egoVerdict').innerHTML = '<b>EGO:</b> ' + player.verdict;
+  document.getElementById('resRank').textContent = best === 'estrella' ? '★ PERFIL DE ÉLITE DETECTADO ★' : 'PERFIL DETECTADO';
+
+  document.getElementById('meterPct').textContent = player.ego + '%';
+  const fill = document.getElementById('meterFill');
+  fill.style.width = '0%';
+  setTimeout(() => { fill.style.width = player.ego + '%'; }, 100);
+
+  renderRoster(best);
+  showScreen('screen-result');
+}
+
+function renderRoster(current){
+  const grid = document.getElementById('rosterGrid');
+  grid.innerHTML = '';
+  PLAYER_ORDER.forEach(key => {
+    const div = document.createElement('div');
+    div.className = 'roster-item' + (key === current ? ' current' : '');
+    div.textContent = PLAYERS[key].name;
+    grid.appendChild(div);
+  });
+}
+
+function restartQuiz(){ startQuiz(); }
+function scrollToRoster(){ document.getElementById('roster').scrollIntoView({behavior:'smooth'}); }
+</script>
+</body>
+</html>
