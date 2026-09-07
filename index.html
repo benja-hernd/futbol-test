@@ -1,704 +1,1307 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>BLUE LOCK — TEST DE RECLUTAMIENTO</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght\@400;600;700;800&family=Inter:wght\@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
+
 :root{
+
   --void:#05070c;
+
   --panel:#0c1120;
+
   --panel-2:#111832;
+
   --line:#232c47;
+
   --ego-blue:#2d5bff;
+
   --ego-cyan:#4ff0ff;
+
   --ego-red:#ff2b4d;
+
   --white:#eef2ff;
+
   --gray:#7684a8;
+
   --gold:#ffce3d;
+
 }
+
 *{box-sizing:border-box; margin:0; padding:0; user-select:none;}
+
 html{scroll-behavior:smooth;}
+
 body{
+
   background:var(--void);
+
   color:var(--white);
+
   font-family:'Inter',sans-serif;
+
   min-height:100vh;
+
   overflow-x:hidden;
+
   position:relative;
+
 }
+
 body::before{
+
   content:"";
+
   position:fixed; inset:0;
+
   background-image:
+
     linear-gradient(rgba(45,91,255,.05) 1px, transparent 1px),
+
     linear-gradient(90deg, rgba(45,91,255,.05) 1px, transparent 1px);
+
   background-size: 42px 42px;
+
   pointer-events:none;
+
   z-index:0;
+
   mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+
 }
+
 .wrap{position:relative; z-index:1; max-width:920px; margin:0 auto; padding:24px 20px 80px;}
 
 /* ---------- topbar ---------- */
+
 .topbar{display:flex; align-items:center; justify-content:space-between; padding:18px 4px 36px; border-bottom:1px solid var(--line); margin-bottom:40px;}
+
 .logo{
+
   font-family:'Anton', sans-serif;
+
   font-size:26px;
+
   letter-spacing:2px;
+
   display:flex; align-items:center; gap:10px;
+
 }
+
 .logo .lock-icon{
+
   width:26px; height:30px;
+
   border:3px solid var(--ego-cyan);
+
   border-radius:4px 4px 0 0;
+
   position:relative;
+
   clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0 100%);
+
 }
+
 .logo .lock-icon::before{
+
   content:"";
+
   position:absolute; top:-16px; left:2px;
+
   width:16px; height:16px;
+
   border:3px solid var(--ego-cyan);
+
   border-bottom:none;
+
   border-radius:50% 50% 0 0;
+
 }
+
 .tag-id{font-family:'Barlow Condensed'; font-size:13px; letter-spacing:3px; color:var(--gray); text-transform:uppercase;}
 
 /* ---------- hero / intro ---------- */
+
 .screen{display:none; animation:fadeUp .5s ease both;}
+
 .screen.active{display:block;}
+
 @keyframes fadeUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
 
 .eyebrow{
+
   font-family:'Barlow Condensed'; font-weight:700;
+
   color:var(--ego-cyan); letter-spacing:4px; font-size:14px;
+
   text-transform:uppercase; margin-bottom:14px;
+
   display:flex; align-items:center; gap:10px;
+
 }
+
 .eyebrow::before{content:""; width:26px; height:2px; background:var(--ego-cyan); display:inline-block;}
 
 h1.hero-title{
+
   font-family:'Anton', sans-serif;
+
   font-size:clamp(38px, 8vw, 74px);
+
   line-height:0.95;
+
   letter-spacing:1px;
+
   text-transform:uppercase;
+
   margin-bottom:20px;
+
 }
+
 h1.hero-title span{color:var(--ego-blue); -webkit-text-stroke:2px var(--ego-cyan); color:transparent;}
 
 .ego-card{
+
   background:linear-gradient(155deg, var(--panel-2), var(--panel));
+
   border:1px solid var(--line);
+
   border-left:4px solid var(--ego-red);
+
   clip-path: polygon(0 0, 100% 0, 100% 92%, 96% 100%, 0 100%);
+
   padding:28px 26px;
+
   margin:26px 0 34px;
+
   position:relative;
+
 }
+
 .ego-avatar{
+
   width:58px; height:58px;
+
   border-radius:50%;
+
   background:radial-gradient(circle at 35% 30%, #2c3a66, #0b0f1c);
+
   border:2px solid var(--ego-red);
+
   flex:none;
+
   display:flex; align-items:center; justify-content:center;
+
   font-family:'Anton'; font-size:22px; color:var(--ego-red);
+
 }
+
 .ego-header{display:flex; align-items:center; gap:14px; margin-bottom:14px;}
+
 .ego-name{font-family:'Barlow Condensed'; font-weight:800; font-size:19px; letter-spacing:1px;}
+
 .ego-role{font-size:12px; color:var(--gray); letter-spacing:2px; text-transform:uppercase;}
+
 .ego-quote{font-size:16.5px; line-height:1.65; color:#d7deff;}
+
 .ego-quote b{color:var(--ego-cyan);}
 
 .stat-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+
 .stat-chip{
+
   border:1px solid var(--line); background:var(--panel);
+
   padding:10px 16px; font-family:'Barlow Condensed'; letter-spacing:1px;
+
   font-size:14px; color:var(--gray);
+
 }
+
 .stat-chip b{color:var(--white); font-weight:700;}
 
 .btn{
+
   font-family:'Barlow Condensed'; font-weight:800; letter-spacing:2px;
+
   text-transform:uppercase; font-size:17px;
+
   background:var(--ego-blue); color:var(--white);
+
   border:none; padding:17px 34px;
+
   cursor:pointer;
+
   clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
-  transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+
+  transition:transform .15s ease, *background* .15s ease, box-shadow .15s ease;
+
   box-shadow:0 0 0 rgba(79,240,255,0);
+
 }
+
 .btn:hover{background:var(--ego-cyan); color:var(--void); transform:translateX(2px); box-shadow:0 0 24px rgba(79,240,255,.35);}
+
 .btn:active{transform:translateX(0) scale(.98);}
+
 .btn-danger{background:var(--ego-red);}
+
 .btn-danger:hover{background:#ff526d; color:var(--white);}
+
 .btn-ghost{
+
   background:transparent; border:1px solid var(--line); color:var(--gray);
+
   clip-path:none; padding:14px 26px;
+
 }
+
 .btn-ghost:hover{border-color:var(--ego-cyan); color:var(--ego-cyan); box-shadow:none;}
 
 /* ---------- quiz ---------- */
+
 .progress-track{
+
   height:8px; background:var(--panel); border:1px solid var(--line);
+
   clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+
   overflow:hidden; margin-bottom:10px;
+
 }
+
 .progress-fill{height:100%; background:linear-gradient(90deg, var(--ego-blue), var(--ego-cyan)); width:0%; transition:width .4s ease;}
+
 .progress-label{
+
   font-family:'Barlow Condensed'; letter-spacing:2px; font-size:13px; color:var(--gray);
+
   display:flex; justify-content:space-between; margin-bottom:38px; text-transform:uppercase;
+
 }
+
 .progress-label b{color:var(--ego-cyan);}
 
 .q-number{
+
   font-family:'Anton'; font-size:15px; color:var(--ego-red);
+
   letter-spacing:3px; margin-bottom:10px;
+
 }
+
 .q-text{
+
   font-family:'Anton'; font-size:clamp(24px,4.2vw,34px);
+
   line-height:1.15; margin-bottom:30px; text-transform:uppercase; letter-spacing:.5px;
+
 }
+
 .options{display:flex; flex-direction:column; gap:12px;}
+
 .option{
+
   background:var(--panel); border:1px solid var(--line);
+
   padding:18px 22px; text-align:left; color:var(--white);
+
   font-family:'Inter'; font-size:15.5px; font-weight:500;
+
   cursor:pointer; position:relative; overflow:hidden;
-  transition:border-color .15s ease, transform .12s ease, background .15s ease;
+
+  transition:border-color .15s ease, transform .12s ease, *background* .15s ease;
+
   display:flex; align-items:center; gap:14px;
+
 }
+
 .option .opt-letter{
+
   font-family:'Anton'; font-size:14px; color:var(--gray);
+
   width:26px; height:26px; border:1px solid var(--line); border-radius:50%;
+
   display:flex; align-items:center; justify-content:center; flex:none;
+
   transition:all .15s ease;
+
 }
+
 .option:hover{border-color:var(--ego-blue); transform:translateX(4px); background:var(--panel-2);}
+
 .option:hover .opt-letter{border-color:var(--ego-cyan); color:var(--ego-cyan);}
+
 .option:active{transform:translateX(2px) scale(.995);}
 
 /* ---------- minigames ---------- */
+
 .mg-header{
+
   border:1px solid var(--ego-red);
+
   background:linear-gradient(90deg, rgba(255,43,77,0.15), transparent);
+
   padding:12px 18px; margin-bottom:20px;
+
   display:flex; align-items:center; justify-content:space-between;
+
 }
+
 .mg-title-wrap{margin-bottom:16px;}
+
 .mg-badge{font-family:'Barlow Condensed'; font-size:13px; color:var(--ego-red); font-weight:800; letter-spacing:2px; text-transform:uppercase;}
+
 .mg-title{font-family:'Anton'; font-size:clamp(26px, 5vw, 38px); letter-spacing:1px; text-transform:uppercase; color:var(--white);}
+
 .mg-desc{font-size:15px; color:var(--gray); margin-bottom:20px; line-height:1.5;}
 
 .canvas-container{
+
   position:relative; width:100%; max-width:640px; margin:0 auto 20px;
+
   border:2px solid var(--line); background:#060a14;
+
   box-shadow:0 0 30px rgba(0,0,0,0.8);
+
   aspect-ratio: 16 / 9;
+
   overflow:hidden;
+
   touch-action:none;
+
 }
+
 canvas#mgCanvas{width:100%; height:100%; display:block;}
 
 .mg-overlay{
+
   position:absolute; inset:0;
+
   background:rgba(5,7,12,0.88);
+
   display:flex; flex-direction:column; align-items:center; justify-content:center;
+
   padding:20px; text-align:center; z-index:10;
+
   backdrop-filter:blur(4px);
+
 }
+
 .mg-overlay-title{font-family:'Anton'; font-size:32px; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;}
+
 .mg-overlay-msg{font-size:15px; color:#d7deff; max-width:400px; margin-bottom:20px; line-height:1.5;}
 
 /* ---------- result ---------- */
+
 .result-top{text-align:center; margin-bottom:8px;}
+
 .result-eyebrow{
+
   font-family:'Barlow Condensed'; letter-spacing:4px; color:var(--ego-red); font-weight:800;
+
   font-size:14px; text-transform:uppercase;
+
 }
+
 .result-card{
+
   margin-top:22px;
+
   border:1px solid var(--line);
+
   background:linear-gradient(165deg, var(--panel-2), var(--panel) 60%);
+
   clip-path: polygon(0 22px, 22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+
   padding:44px 34px;
+
   position:relative;
+
   overflow:hidden;
+
 }
+
 .result-card::after{
+
   content:"";
+
   position:absolute; top:-40%; right:-20%; width:60%; height:160%;
+
   background:radial-gradient(circle, rgba(45,91,255,.18), transparent 60%);
+
   pointer-events:none;
+
 }
+
 .result-rank{
+
   font-family:'Anton'; font-size:15px; color:var(--gray); letter-spacing:3px; margin-bottom:6px;
+
 }
+
 .result-name{
+
   font-family:'Anton'; font-size:clamp(32px,6.4vw,54px); line-height:1;
+
   text-transform:uppercase; margin-bottom:18px; color:var(--white);
+
   text-shadow:0 0 26px rgba(79,240,255,.25);
+
 }
+
 .result-name.legend{color:var(--gold); text-shadow:0 0 30px rgba(255,206,61,.5);}
+
 .result-badge{
+
   display:inline-flex; align-items:center; gap:8px;
+
   border:1px solid var(--ego-blue); color:var(--ego-cyan);
+
   font-family:'Barlow Condensed'; font-weight:700; letter-spacing:2px; font-size:12.5px;
+
   padding:6px 14px; text-transform:uppercase; margin-bottom:22px;
+
 }
+
 .result-desc{font-size:16.5px; line-height:1.75; color:#d7deff; margin-bottom:26px;}
+
 .result-desc b{color:var(--white);}
+
 .ego-verdict{
+
   border-top:1px dashed var(--line); padding-top:20px; margin-top:20px;
+
   font-family:'Barlow Condensed'; font-size:16px; color:var(--gray); line-height:1.6;
+
 }
+
 .ego-verdict b{color:var(--ego-red);}
 
 .mg-stat-box{
+
   margin-top:20px; padding:14px; background:var(--void); border:1px solid var(--line);
+
   font-family:'Barlow Condensed'; font-size:14px; color:var(--gray); letter-spacing:1px;
+
   display:flex; justify-content:space-between; align-items:center;
+
 }
+
 .mg-stat-box b{color:var(--ego-cyan); font-size:16px;}
 
 .meter{margin-top:26px;}
+
 .meter-label{display:flex; justify-content:space-between; font-family:'Barlow Condensed'; font-size:13px; letter-spacing:1.5px; color:var(--gray); margin-bottom:8px; text-transform:uppercase;}
+
 .meter-track{height:10px; background:var(--void); border:1px solid var(--line); overflow:hidden;}
+
 .meter-fill{height:100%; background:linear-gradient(90deg, var(--ego-red), var(--gold)); width:0%; transition:width 1s ease;}
 
 .result-actions{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
 
 .roster{margin-top:70px;}
+
 .roster-title{font-family:'Anton'; font-size:15px; letter-spacing:3px; color:var(--gray); margin-bottom:16px; text-transform:uppercase;}
+
 .roster-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px;}
+
 .roster-item{
+
   border:1px solid var(--line); background:var(--panel); padding:12px 14px;
+
   font-family:'Barlow Condensed'; font-size:13.5px; color:var(--gray); letter-spacing:.5px;
+
   transition:all .15s ease;
+
 }
+
 .roster-item.current{border-color:var(--ego-cyan); color:var(--ego-cyan); background:var(--panel-2);}
 
 footer{
+
   text-align:center; margin-top:70px; padding-top:24px; border-top:1px solid var(--line);
+
   font-family:'Barlow Condensed'; font-size:12.5px; letter-spacing:2px; color:var(--gray); text-transform:uppercase;
+
 }
 
 @media (max-width:520px){
+
   .ego-card{padding:22px 18px;}
+
   .result-card{padding:34px 22px;}
+
   .result-actions{flex-direction:column;}
+
   .btn, .btn-ghost{width:100%; text-align:center;}
+
 }
 
 @media (prefers-reduced-motion: reduce){
+
   *{animation:none !important; transition:none !important;}
+
 }
+
 </style>
+
 </head>
+
 <body>
+
 <div class="wrap">
 
   <div class="topbar">
+
     <div class="logo"><span class="lock-icon"></span>BLUE LOCK</div>
+
     <div class="tag-id">PROGRAMA DE ELIMINACIÓN Nº 0947</div>
+
   </div>
 
   <!-- ================= INTRO ================= -->
+
   <section class="screen active" id="screen-intro">
+
     <div class="eyebrow">Evaluación de aptitud futbolística + Pruebas de campo</div>
+
     <h1 class="hero-title">¿QUÉ CLASE<br>DE <span>JUGADOR</span><br>SOS VOS?</h1>
 
     <div class="ego-card">
+
       <div class="ego-header">
+
         <div class="ego-avatar">E</div>
+
         <div>
+
           <div class="ego-name">EGO GUARDIOLA</div>
+
           <div class="ego-role">Director del programa Blue Lock</div>
+
         </div>
+
       </div>
+
       <p class="ego-quote">
+
         Escuchame bien. Las palabras se las lleva el viento. Acá no solo vas a responder preguntas: 
+
         <b>cada 2 preguntas vas a entrar a la cancha en minijuegos de campo extremas.</b> Puntería, reflejos y temple bajo presión. 
+
         Si querés ser el <b>Delantero Estrella</b>, vas a tener que demostrar que tu cabeza y tus pies están a la altura. 
+
         Un solo segundo de duda y sos desecho futbolístico.
+
       </p>
+
     </div>
 
     <div class="stat-row">
+
       <div class="stat-chip"><b>10</b> Preguntas</div>
+
       <div class="stat-chip"><b>5</b> Desafíos de Campo Extremos</div>
+
       <div class="stat-chip"><b>12</b> Perfiles de Jugador</div>
+
       <div class="stat-chip">Dificultad Estrella: <b>EXTREMA</b></div>
+
     </div>
 
     <button class="btn" onclick="startQuiz()">ENTRAR A LA INSTALACIÓN →</button>
+
   </section>
 
   <!-- ================= QUIZ ================= -->
+
   <section class="screen" id="screen-quiz">
+
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
     <div class="progress-label"><span>EVALUACIÓN EN CURSO</span><span><b id="qIndex">1</b>/10</span></div>
 
     <div class="q-number" id="qNumber">PREGUNTA 01</div>
+
     <h2 class="q-text" id="qText">—</h2>
+
     <div class="options" id="qOptions"></div>
+
   </section>
 
   <!-- ================= MINIGAME ================= -->
+
   <section class="screen" id="screen-minigame">
+
     <div class="mg-header">
+
       <span class="mg-badge" id="mgNumberBadge">DESAFÍO DE CAMPO #1</span>
+
       <span style="font-family:'Barlow Condensed'; font-size:12px; color:var(--gray); letter-spacing:1px;">PRUEBA DE APTITUD FÍSICA Y TÁCTICA</span>
+
     </div>
 
     <div class="mg-title-wrap">
+
       <div class="mg-badge" id="mgCategory">REFLEJOS / PUNTERÍA</div>
+
       <h2 class="mg-title" id="mgTitle">ESCUADRA MORTAL</h2>
+
     </div>
+
     <p class="mg-desc" id="mgDesc">Ajustá el tiro. Hacé click o tocá exactamente cuando el retículo pase por la ESCUADRA del arco.</p>
 
     <div class="canvas-container" id="canvasContainer">
+
       <canvas id="mgCanvas" width="600" height="340"></canvas>
+
       <div class="mg-overlay" id="mgOverlay">
+
         <div class="mg-overlay-title" id="mgOverlayTitle">¿LISTO PARA EL IMPACTO?</div>
+
         <div class="mg-overlay-msg" id="mgOverlayMsg">Hacé click en INICIAR PRUEBA. Mantené la calma y actuá rápido.</div>
+
         <button class="btn btn-danger" id="mgStartBtn" onclick="initCurrentMinigame()">INICIAR PRUEBA</button>
+
       </div>
+
     </div>
+
   </section>
 
   <!-- ================= RESULT ================= -->
+
   <section class="screen" id="screen-result">
+
     <div class="result-top">
+
       <div class="result-eyebrow">Evaluación finalizada</div>
+
     </div>
 
     <div class="result-card">
+
       <div class="result-rank" id="resRank">PERFIL DETECTADO</div>
+
       <div class="result-name" id="resName">—</div>
+
       <div class="result-badge" id="resBadge">—</div>
+
       <p class="result-desc" id="resDesc">—</p>
 
       <div class="mg-stat-box">
+
         <span>RENDIMIENTO EN MINIJUEGOS:</span>
+
         <b id="mgPerfStat">0/5 PERFECTOS</b>
+
       </div>
 
       <div class="meter">
+
         <div class="meter-label"><span>NIVEL DE EGOÍSMO Y EJECUCIÓN</span><span id="meterPct">0%</span></div>
+
         <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
+
       </div>
 
       <div class="ego-verdict" id="egoVerdict"><b>EGO:</b> —</div>
+
     </div>
 
     <div class="result-actions">
+
       <button class="btn" onclick="restartQuiz()">VOLVER A EVALUARME</button>
+
       <button class="btn btn-ghost" onclick="scrollToRoster()">VER LOS 12 PERFILES</button>
+
     </div>
 
     <div class="roster" id="roster">
+
       <div class="roster-title">Plantel completo — Blue Lock</div>
+
       <div class="roster-grid" id="rosterGrid"></div>
+
     </div>
+
   </section>
 
   <footer>Blue Lock — Test de Reclutamiento no oficial · Hecho por un fan · No afiliado a Kodansha / Muneyuki Kaneshiro</footer>
+
 </div>
 
 <script>
+
 /* ============ DATOS DE JUGADORES ============ */
+
 const PLAYERS = {
+
   burro: {
+
     name: "El Burro",
+
     badge: "Fuerza bruta sin filtro",
+
     ego: 30,
+
     desc: "Corrés como si el partido se ganara al que más se cansa. Tenés motor, pulmón y ganas de sobra, pero la pelota parece tener vida propia cada vez que te la dan. En Blue Lock a esto lo llaman 'potencial físico desperdiciado': todo el cuerpo de un animal de tracción y las manos de alguien que nunca tocó un balón.",
+
     verdict: "Con ese físico y cero técnica sos un arma sin gatillo. O aprendés a pensar la jugada, o te vamos a usar de sparring para que los demás practiquen caños."
+
   },
+
   comebanco: {
+
     name: "El Come Banco",
+
     badge: "Suplente eterno",
+
     ego: 15,
+
     desc: "Tu verdadero talento es calentar el asiento. Entrenás igual que todos, escuchás cada charla técnica con atención militar, y después el domingo mirás los 90 minutos desde la mejor butaca del estadio. No es que seas malo: es que siempre hay alguien, un poquito mejor, un poquito más decidido, que te saca el lugar.",
+
     verdict: "Acá no hay banco de suplentes, infeliz. Acá el que no ataca, desaparece. Andá pensando otra excusa, porque esa ya no te la voy a comprar."
+
   },
+
   picaymuere: {
+
     name: "El Que Pica y Muere",
+
     badge: "Todo pólvora, poco fuego",
+
     ego: 45,
+
     desc: "Los primeros 15 minutos sos el mejor jugador de la cancha. Presionás, gritás, corrés cada pelota como si fuera la final del mundo. Y después... nada. El tanque se vacía y terminás caminando mientras te pasan por al lado. Explotás fuerte y te apagás más rápido todavía.",
+
     verdict: "Tenés la chispa que a otros les falta, pero una chispa sola no prende una guerra. Si aprendés a dosificarte, sos peligroso. Si no, sos fuego artificial: lindo, ruidoso e inútil a los 20 minutos."
+
   },
+
   pateademasiado: {
+
     name: "El Que Patea Demasiado",
+
     badge: "Ego sin puntería",
+
     ego: 85,
+
     desc: "Tenés un solo plan de juego: la pelota me llega, la pelota se va al arco. No importa el ángulo, la marca, ni que haya un compañero solo y mejor plantado. Rifás cada pelota como si fuera la última que vas a tocar en tu vida. A veces entra. La mayoría de las veces, el arquero ni se tira.",
+
     verdict: "Me gusta tu hambre, pero el hambre sin cabeza es solo desperdicio. Un buen delantero no tira más: tira mejor. Aprendé la diferencia o vas a terminar regalando pelotas toda tu carrera."
+
   },
+
   pateaparaelotrolado: {
+
     name: "El Que Patea Para el Otro Lado",
+
     badge: "El desastre andante",
+
     ego: 5,
+
     desc: "Bajo presión, tu cuerpo hace lo que quiere. Definiciones que sobran, pases que se convierten en centros al arco propio, un gol cantado que termina en córner para el rival por vos mismo. No es mala suerte: es que en el momento clave, algo en tu cabeza se desconecta del todo.",
+
     verdict: "Sos la prueba de que el talento físico no sirve de nada si el cerebro se apaga con la presión. O trabajás la cabeza, o vas a seguir siendo el chiste del vestuario."
+
   },
+
   estrella: {
+
     name: "El Delantero Estrella",
+
     badge: "El único bueno de verdad",
+
     ego: 100,
+
     desc: "Frialdad absoluta para definir, técnica milimétrica bajo presión extrema y la certeza indiscutible de que la cancha te pertenece. Dominaste tanto la teoría egoísta como las pruebas físicas en el campo. Sos exactamente el monstruo que Blue Lock vino a buscar.",
+
     verdict: "Por fin. Después de tanto descarte, aparece uno que no solo habla sino que ejecuta en el campo de batalla. No sos parte de un equipo: el equipo es una herramienta que usás para destruir al rival. Demostrármelo siempre."
+
   },
+
   arquero: {
+
     name: "El Que Mandan al Arco",
+
     badge: "Reconvertido a la fuerza",
+
     ego: 20,
+
     desc: "Empezaste jugando de todo menos de arquero, hasta que un día, sin preguntarte nada, te pusieron los guantes. Y ahí te quedaste. No fue vocación, fue necesidad del equipo, y con el tiempo terminaste resignado a mirar el partido de espaldas al gol que soñabas hacer.",
+
     verdict: "Terminaste bajo los tres palos por descarte, no por deseo. Algún día alguien te va a tener que preguntar qué querías ser vos, no lo que el equipo necesitaba. Mientras tanto, atajá."
+
   },
+
   malperdedor: {
+
     name: "El Que No Sabe Perder",
+
     badge: "Orgullo sin freno",
+
     ego: 60,
+
     desc: "Un partido amistoso se te convierte en cuestión de vida o muerte. Discutís cada fallo, culpás al árbitro, al pasto, al viento, a cualquiera menos a vos. Perder no te enseña nada porque no llegás a procesarlo: solo te enoja. Y ese enojo, la mayoría de las veces, te hace jugar peor.",
+
     verdict: "Odiar perder está bien. Es casi un requisito acá adentro. El problema es cuando ese odio te ciega en vez de afilarte. Convertí la bronca en gol, no en excusa."
+
   },
+
   antifutbol: {
+
     name: "El Antifútbol",
+
     badge: "Juega para que nadie juegue",
+
     ego: 55,
+
     desc: "Tu especialidad no es crear, es destruir. Cortás circuitos, frenás jugadas con una entrada límite, hacés tiempo cuando vas ganando por uno. El árbitro te tiene fichado, el rival te odia, y en el fondo sabés que el folclor del partido lo generás vos.",
+
     verdict: "Sabés jugar sucio mejor que la mayoría juega limpio, y eso es un arma. Pero a mí no me interesa el que evita que jueguen los demás: me interesa el que juega mejor que todos. Elegí de qué lado de esa frase querés estar."
+
   },
+
   lesionado: {
+
     name: "El Que Se Lesiona Solo",
+
     badge: "Cristal de laboratorio",
+
     ego: 25,
+
     desc: "Basta con que tengas dos semanas seguidas de buen nivel para que aparezca una molestia de la nada. Un tironcito, una recaída, una torcedura en el momento menos pensado. El cuerpo parece boicotearte justo cuando las cosas empiezan a salir bien.",
+
     verdict: "No sé si es el cuerpo o es la cabeza la que no aguanta la exigencia. Lo que sí sé es que un jugador que no está en la cancha, no existe para mí. Andá a fisioterapia y volvé entero, si podés."
+
   },
+
   showman: {
+
     name: "El Que Juega Para la Tribuna",
+
     badge: "Más show que gol",
+
     ego: 70,
+
     desc: "Cada movimiento tuyo tiene un ojo puesto en quién te está mirando. Un caño innecesario, una vaselina en un dos contra cero fácil, un festejo coreografiado para el que hiciste con el arco vacío. El resultado, muchas veces, pasa a segundo plano frente al aplauso.",
+
     verdict: "El circo está bien cuando gana el circo. El problema es cuando el show te importa más que el marcador. A la gente se la conquista ganando, no posando."
+
   },
+
   nuncadefine: {
+
     name: "El Que Nunca Define",
+
     badge: "El miedo al error",
+
     ego: 10,
+
     desc: "Te llega la pelota en posición de gol y la primera reacción es buscar a alguien a quien dársela. No por generosidad: por miedo. Miedo a errar, a que te critiquen, a cargar con la responsabilidad del fallo. Preferís mil veces ser cómplice de un error ajeno que protagonista de uno propio.",
+
     verdict: "El miedo a fallar es lo que te está matando, no la falta de técnica. Acá adentro, el que no se anima a errar, jamás va a anotar. Definí. Aunque sea mal. Definí."
+
   }
+
 };
 
 const PLAYER_ORDER = ["estrella","pateademasiado","antifutbol","malperdedor","showman","picaymuere",
+
   "arquero","burro","lesionado","comebanco","nuncadefine","pateaparaelotrolado"];
 
 /* ============ PREGUNTAS ============ */
+
 const QUESTIONS = [
+
   {
+
     q: "En un picado de amigos, alguien te grita que estás jugando mal. ¿Qué hacés?",
+
     opts: [
+
       {t:"Le contesto peor de lo que me gritó, y sigo discutiendo tres jugadas después.", p:{malperdedor:3}},
+
       {t:"Me río, le pido perdón al equipo y sigo jugando igual de mal.", p:{comebanco:3}},
+
       {t:"No le contesto nada, pero en la próxima jugada le hago un caño innecesario.", p:{showman:2, malperdedor:1}},
+
       {t:"Tiene razón. Cambio algo puntual y en dos jugadas resuelvo el partido.", p:{estrella:3}},
+
       {t:"Empiezo a entrarle más fuerte al que me gritó en la próxima disputa.", p:{antifutbol:3}},
+
     ]
+
   },
+
   {
+
     q: "Te queda un mano a mano con el arquero, sin ángulo, en el último minuto.",
+
     opts: [
+
       {t:"Le pego con toda el alma al primer palo. Adentro o afuera, así soy yo.", p:{pateademasiado:3}},
+
       {t:"Amago una vez de más, pierdo el tiempo justo y me la sacan.", p:{picaymuere:2, showman:1}},
+
       {t:"Mando el pase atrás para que defina uno mejor ubicado.", p:{nuncadefine:3}},
+
       {t:"Defino con la calma de quien ya sabe que va a entrar.", p:{estrella:3}},
+
       {t:"Piso mal, me tuerzo el tobillo justo en la carrera y no llego.", p:{lesionado:3}},
+
     ]
+
   },
+
   {
+
     q: "El técnico arma el equipo titular y tu nombre no aparece en la lista.",
+
     opts: [
+
       {t:"Lo esperaba. Preparo la botella de agua para el banco, otra vez.", p:{comebanco:3}},
+
       {t:"Voy a reclamarle el puesto sin importar lo que me responda.", p:{malperdedor:2, estrella:1}},
+
       {t:"Me entero y de la bronca digo que me duele algo para no ir.", p:{lesionado:2, comebanco:1}},
+
       {t:"Ni me sorprende: total, siempre termino atajando cuando falta alguien.", p:{arquero:3}},
+
       {t:"Sigo entrenando el doble, en silencio, hasta que no les quede otra.", p:{burro:2, estrella:1}},
+
     ]
+
   },
+
   {
+
     q: "Vas perdiendo 3 a 0 al entretiempo. ¿Qué pasa por tu cabeza?",
+
     opts: [
+
       {t:"Que la culpa es del árbitro, de la cancha, del clima. De cualquiera menos mía.", p:{malperdedor:3}},
+
       {t:"Que hay que empezar a jugar más 'a la que te criaste', total ya está perdido.", p:{antifutbol:2, burro:1}},
+
       {t:"Que todavía hay 45 minutos y yo solo puedo dar vuelta esto.", p:{estrella:3}},
+
       {t:"Que me quiero ir directamente a los vestuarios y dejar de sufrir.", p:{comebanco:2, picaymuere:1}},
+
       {t:"Que voy a correr el doble, aunque eso signifique no llegar al final.", p:{picaymuere:3}},
+
     ]
+
   },
+
   {
+
     q: "Un compañero se equivoca feo y te regala un gol al rival. ¿Reacción?",
+
     opts: [
+
       {t:"Le hago un gesto de reproche que se ve desde la tribuna.", p:{malperdedor:2, showman:1}},
+
       {t:"Nada, sigo mi carril, esas cosas no me sacan de eje.", p:{estrella:2, burro:1}},
+
       {t:"Uso ese momento para bajar el ritmo y frenar el partido como sea.", p:{antifutbol:3}},
+
       {t:"Me pongo tan mal que se me va el foco el resto del partido.", p:{lesionado:1, picaymuere:2}},
+
       {t:"Pienso que si yo hubiera estado ahí, no pasaba.", p:{nuncadefine:1, malperdedor:1, estrella:1}},
+
     ]
+
   },
+
   {
+
     q: "Elegí la frase que más se parece a algo que dirías después de un partido.",
+
     opts: [
+
       {t:"'Corrí muchísimo, di todo lo que tenía.' (aunque no toqué una pelota limpia)", p:{burro:3}},
+
       {t:"'Hice lo que pude desde el banco... alentando.'", p:{comebanco:3}},
+
       {t:"'Si el árbitro no me cobraba esa, otro era el resultado.'", p:{antifutbol:2, malperdedor:1}},
+
       {t:"'Hice tres goles. ¿Qué más querés que te diga?'", p:{estrella:3}},
+
       {t:"'Estuve bárbaro los primeros veinte minutos, después no sé qué pasó.'", p:{picaymuere:3}},
+
     ]
+
   },
+
   {
+
     q: "Tenés que patear un penal decisivo. ¿Cómo llegás a la pelota?",
+
     opts: [
+
       {t:"Pidiéndole a otro que la patee él, yo no quiero cargar con eso.", p:{nuncadefine:3}},
+
       {t:"Con el pulso disparado, pero convencido de que va a entrar.", p:{estrella:2, picaymuere:1}},
+
       {t:"Con un dolor extraño en la pierna que apareció de la nada.", p:{lesionado:3}},
+
       {t:"Pateando fortísimo, sin mirar demasiado dónde, con toda la potencia que tengo.", p:{burro:2, pateademasiado:1}},
+
       {t:"Amagando una gambeta al arquero antes de patear, para la tribuna.", p:{showman:3}},
+
     ]
+
   },
+
   {
+
     q: "¿Qué comentario de la gente que te conoce se repite más seguido?",
+
     opts: [
+
       {t:"'Tiene un físico impresionante, lástima que no sabe qué hacer con la pelota.'", p:{burro:3}},
+
       {t:"'Siempre entrena bien pero el domingo nunca lo ponen.'", p:{comebanco:3}},
+
       {t:"'Cuando se calienta, se le va el partido de las manos.'", p:{malperdedor:3}},
+
       {t:"'Cada vez que agarra la pelota, algo especial pasa.'", p:{estrella:3}},
+
       {t:"'Justo cuando estaba jugando bien, se lesionó otra vez.'", p:{lesionado:3}},
+
     ]
+
   },
+
   {
+
     q: "Tu equipo va ganando 1 a 0 faltando cinco minutos. ¿Tu prioridad?",
+
     opts: [
+
       {t:"Buscar cualquier excusa para tirarme al piso y hacer tiempo.", p:{antifutbol:3}},
+
       {t:"Seguir yendo al frente, buscando el segundo para liquidarlo.", p:{estrella:3}},
+
       {t:"Pedir el cambio, porque ya no me quedan piernas.", p:{picaymuere:2, lesionado:1}},
+
       {t:"Meterme atrás a correr cada pelota como si me fuera la vida.", p:{burro:3}},
+
       {t:"Empezar a mirar el reloj más que la pelota, nervioso por perderlo.", p:{malperdedor:2, nuncadefine:1}},
+
     ]
+
   },
+
   {
+
     q: "Última: si tu DT te mira a los ojos y te pregunta '¿para qué jugás al fútbol?', ¿qué le contestás?",
+
     opts: [
+
       {t:"'Para que no me digan que no puse el cuerpo.'", p:{burro:2, comebanco:1}},
+
       {t:"'Para ser el mejor. El único. No hay otra respuesta.'", p:{estrella:3}},
+
       {t:"'Para que la gente hable de mí después del partido.'", p:{showman:3}},
+
       {t:"'Para no perder. Punto. Lo demás no me importa.'", p:{malperdedor:2, antifutbol:1}},
+
       {t:"La verdad, todavía no lo sé del todo.", p:{nuncadefine:3}},
+
     ]
+
   }
+
 ];
 
 /* ============ MINIJUEGOS CATALOGO ============ */
+
 const MINIGAME_TYPES = [
+
   {
+
     id: "aim",
+
     category: "PUNTERÍA EXTREMA",
+
     title: "ESCUADRA MORTAL",
+
     desc: "Un tiro libre al ángulo. El retículo oscila salvajemente. Hacé click o tocá el canvas cuando el retículo cruce EXACTAMENTE por la esquina superior del arco.",
+
     run: runAimGame
+
   },
+
   {
+
     id: "dodge",
+
     category: "TEMPO Y REACCIÓN",
+
     title: "GAMBETA DE REACCIÓN",
+
     desc: "Un defensor te embiste a toda velocidad. Hacé click o tocá el botón cuando el defensor entre en la ZONA DE AMAGO (apenas ~150ms).",
+
     run: runDodgeGame
+
   },
+
   {
+
     id: "reflex",
+
     category: "REFLEJOS Y AGILIDAD",
+
     title: "REFLEJOS EN EL ÁREA",
-    desc: "Aparecerán 5 balones en el área por solo 220ms cada uno. Tocá todos los balones antes de que desaparezcan.",
+
+    desc: "Aparecerán 5 balones en distintas zonas del área. Tenés casi 1 segundo para reaccionar a cada uno: tocá el balón rojo antes de que cambie de posición.",
+
     run: runReflexGame
+
   },
+
   {
+
     id: "stamina",
+
     category: "POTENCIA Y VOLUNTAD",
+
     title: "SOBRECARGA DE STAMINA",
+
     desc: "Masajeá / tocá la pantalla frenéticamente durante 3.5 segundos para mantener la barra en ZONA ÉLITE (>85%). Se vacía rapidísimo.",
+
     run: runStaminaGame
+
+  },
+
+  {
+
+    id: "precision",
+
+    category: "PRECISIÓN Y CONTROL",
+
+    title: "ZONA DE DEFINICIÓN",
+
+    desc: "El objetivo se mueve por el arco. Hacé click o tocá dentro del círculo rojo cuando aparezca. Tenés 5 intentos y necesitás acertar al menos 4 para demostrar precisión de élite.",
+
+    run: runPrecisionGame
+
   }
+
 ];
 
 /* ============ ESTADO DEL JUEGO ============ */
+
 let currentQ = 0;
+
 let scores = {};
+
 let completedMinigames = 0;
+
 let perfectMinigames = 0;
+
 let activeMinigameIdx = 0;
+
 let gameAnimId = null;
 
 function showScreen(id){
+
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+
   document.getElementById(id).classList.add('active');
+
   window.scrollTo({top:0, behavior:'smooth'});
+
 }
 
 function startQuiz(){
+
+  if(gameAnimId) cancelAnimationFrame(gameAnimId);
+  gameAnimId = null;
   currentQ = 0;
+
   completedMinigames = 0;
+
   perfectMinigames = 0;
+
   Object.keys(PLAYERS).forEach(k => scores[k] = 0);
+
   showScreen('screen-quiz');
+
   renderQuestion();
+
 }
 
 function renderQuestion(){
+
   const data = QUESTIONS[currentQ];
+
   document.getElementById('qIndex').textContent = currentQ + 1;
+
   document.getElementById('qNumber').textContent = 'PREGUNTA ' + String(currentQ+1).padStart(2,'0');
+
   document.getElementById('qText').textContent = data.q;
+
   document.getElementById('progressFill').style.width = ((currentQ)/QUESTIONS.length*100) + '%';
 
   const optsWrap = document.getElementById('qOptions');
+
   optsWrap.innerHTML = '';
+
   const letters = ['A','B','C','D','E'];
+
   data.opts.forEach((opt, i) => {
+
     const btn = document.createElement('button');
+
     btn.className = 'option';
+
     btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${opt.t}</span>`;
+
     btn.onclick = () => selectOption(opt.p);
+
     optsWrap.appendChild(btn);
+
   });
+
 }
 
 function selectOption(points){
+
   Object.keys(points).forEach(key => { scores[key] += points[key]; });
+
   currentQ++;
-  
-  // Cada 2 preguntas -> Minijuego
-  if(currentQ % 2 === 0 && currentQ <= 10){
+
+  // Después de CADA pareja de preguntas: 2, 4, 6, 8 y 10.
+  if(currentQ % 2 === 0 && currentQ <= QUESTIONS.length){
     prepareMinigame();
   } else if(currentQ < QUESTIONS.length){
     renderQuestion();
-  } else {
-    document.getElementById('progressFill').style.width = '100%';
-    setTimeout(showResult, 250);
   }
+
 }
 
 function prepareMinigame(){
+
   completedMinigames++;
-  // Elegir un minijuego aleatorio
-  activeMinigameIdx = Math.floor(Math.random() * MINIGAME_TYPES.length);
+  activeMinigameIdx = completedMinigames - 1;
+
   const mg = MINIGAME_TYPES[activeMinigameIdx];
 
   document.getElementById('mgNumberBadge').textContent = `DESAFÍO DE CAMPO #${completedMinigames}/5`;
@@ -708,441 +1311,818 @@ function prepareMinigame(){
 
   const overlay = document.getElementById('mgOverlay');
   overlay.style.display = 'flex';
-  document.getElementById('mgOverlayTitle').textContent = "PRUEBA EN CURSO";
-  document.getElementById('mgOverlayMsg').textContent = "Demostrá tus habilidades físicas. Mantené la concentración.";
+  document.getElementById('mgOverlayTitle').textContent = 'PRUEBA EN CURSO';
+  document.getElementById('mgOverlayMsg').textContent = `Desafío ${completedMinigames} de 5. Demostrá tus habilidades y no aflojes.`;
+
   const startBtn = document.getElementById('mgStartBtn');
   startBtn.style.display = 'inline-block';
-  startBtn.textContent = "INICIAR PRUEBA";
+  startBtn.textContent = 'INICIAR PRUEBA';
+  startBtn.onclick = initCurrentMinigame;
 
   showScreen('screen-minigame');
-  // Reset Canvas Preview
+
   const canvas = document.getElementById('mgCanvas');
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = "#0c1120";
+  ctx.fillStyle = '#0c1120';
   ctx.fillRect(0,0,canvas.width,canvas.height);
 }
 
 function initCurrentMinigame(){
+
   document.getElementById('mgOverlay').style.display = 'none';
+
   const mg = MINIGAME_TYPES[activeMinigameIdx];
+
   mg.run();
+
 }
 
 function endMinigame(resultType, titleText, msgText, scoreImpact){
+
   if(gameAnimId) cancelAnimationFrame(gameAnimId);
 
   // Impacto en puntuación
+
   Object.keys(scoreImpact).forEach(k => { scores[k] += scoreImpact[k]; });
 
   if(resultType === 'perfect'){
+
     perfectMinigames++;
+
   }
 
   const overlay = document.getElementById('mgOverlay');
+
   overlay.style.display = 'flex';
+
   document.getElementById('mgOverlayTitle').textContent = titleText;
+
   document.getElementById('mgOverlayMsg').textContent = msgText;
 
   const startBtn = document.getElementById('mgStartBtn');
+
   startBtn.style.display = 'inline-block';
+
   startBtn.textContent = "CONTINUAR TEST →";
+
   startBtn.onclick = () => {
+
+    startBtn.onclick = null;
+
     if(currentQ < QUESTIONS.length){
       showScreen('screen-quiz');
       renderQuestion();
     } else {
+      document.getElementById('progressFill').style.width = '100%';
       showResult();
     }
+
   };
+
 }
 
 /* ========================================================
+
    MINIJUEGO 1: ESCUADRA MORTAL (Aiming)
-   ======================================================== */
+
+   \======================================================== */
+
 function runAimGame(){
+
   const canvas = document.getElementById('mgCanvas');
+
   const ctx = canvas.getContext('2d');
+
   let time = 0;
+
   let active = true;
 
   // Limpiar eventos previos
+
   const newCanvas = canvas.cloneNode(true);
+
   canvas.parentNode.replaceChild(newCanvas, canvas);
+
   const playCanvas = document.getElementById('mgCanvas');
+
   const playCtx = playCanvas.getContext('2d');
 
   function loop(){
+
     if(!active) return;
+
     time += 0.055;
+
     playCtx.clearRect(0,0,playCanvas.width,playCanvas.height);
 
     // Dibujar campo / arco
+
     playCtx.fillStyle = "#081022";
+
     playCtx.fillRect(0,0,playCanvas.width,playCanvas.height);
 
     // Arco
+
     const goalX = 100, goalY = 50, goalW = 400, goalH = 220;
+
     playCtx.strokeStyle = "#4ff0ff";
+
     playCtx.lineWidth = 6;
+
     playCtx.strokeRect(goalX, goalY, goalW, goalH);
 
     // Escuadra objetivo (Top Right / Top Left)
+
     const escuadraX = goalX + goalW - 30;
+
     const escuadraY = goalY + 30;
+
     playCtx.fillStyle = "rgba(255, 43, 77, 0.4)";
+
     playCtx.beginPath();
+
     playCtx.arc(escuadraX, escuadraY, 28, 0, Math.PI*2);
+
     playCtx.fill();
+
     playCtx.strokeStyle = "#ff2b4d";
+
     playCtx.lineWidth = 2;
+
     playCtx.stroke();
 
     // Retículo oscilante loco (Lissajous fast)
+
     const rx = 300 + Math.sin(time * 2.8) * 190 + Math.cos(time * 4.1) * 30;
+
     const ry = 160 + Math.cos(time * 3.2) * 100 + Math.sin(time * 5.5) * 20;
 
     // Dibujar mira
+
     playCtx.strokeStyle = "#ffce3d";
+
     playCtx.lineWidth = 3;
+
     playCtx.beginPath();
+
     playCtx.arc(rx, ry, 16, 0, Math.PI*2);
+
     playCtx.stroke();
+
     playCtx.beginPath();
+
     playCtx.moveTo(rx - 25, ry); playCtx.lineTo(rx + 25, ry);
+
     playCtx.moveTo(rx, ry - 25); playCtx.lineTo(rx, ry + 25);
+
     playCtx.stroke();
 
     gameAnimId = requestAnimationFrame(loop);
+
   }
 
   function handleShoot(e){
+
     if(!active) return;
+
     active = false;
 
     const timeVal = time;
+
     const rx = 300 + Math.sin(timeVal * 2.8) * 190 + Math.cos(timeVal * 4.1) * 30;
+
     const ry = 160 + Math.cos(timeVal * 3.2) * 100 + Math.sin(timeVal * 5.5) * 20;
 
     const escuadraX = 100 + 400 - 30;
+
     const escuadraY = 50 + 30;
+
     const dist = Math.hypot(rx - escuadraX, ry - escuadraY);
 
     if(dist < 32){
+
       endMinigame('perfect', '¡GOLAZO A LA ESCUADRA!', 'Impacto perfecto. Frialdad quirúrgica bajo presión.', {estrella:4, pateademasiado:2});
+
     } else if(rx >= 100 && rx <= 500 && ry >= 50 && ry <= 270){
+
       endMinigame('good', 'GOL ORDINARIO', 'Entró, pero sin la precisión de una superestrella.', {pateademasiado:2, showman:1});
+
     } else {
+
       endMinigame('fail', '¡A LA TRIBUNA!', 'La pelota se fue lejísimos. Cero control de pie.', {burro:3, pateaparaelotrolado:3});
+
     }
+
   }
 
   playCanvas.addEventListener('pointerdown', handleShoot);
+
   loop();
+
 }
 
 /* ========================================================
+
    MINIJUEGO 2: GAMBETA DE REACCIÓN (Dodge / Timing)
-   ======================================================== */
+
+   \======================================================== */
+
 function runDodgeGame(){
+
   const canvas = document.getElementById('mgCanvas');
+
   const newCanvas = canvas.cloneNode(true);
+
   canvas.parentNode.replaceChild(newCanvas, canvas);
+
   const playCanvas = document.getElementById('mgCanvas');
+
   const playCtx = playCanvas.getContext('2d');
 
   let defY = 0;
+
   let active = true;
+
   const defSpeed = 7.8; // Muy rápido
 
   function loop(){
+
     if(!active) return;
+
     defY += defSpeed;
+
     playCtx.clearRect(0,0,playCanvas.width,playCanvas.height);
 
     // Fondo cancha
+
     playCtx.fillStyle = "#0a1329";
+
     playCtx.fillRect(0,0,playCanvas.width,playCanvas.height);
 
     // Zona de amago (Green zone)
+
     playCtx.fillStyle = "rgba(79, 240, 255, 0.18)";
+
     playCtx.fillRect(180, 210, 240, 45);
+
     playCtx.strokeStyle = "#4ff0ff";
+
     playCtx.lineWidth = 2;
+
     playCtx.strokeRect(180, 210, 240, 45);
 
     // Jugador (Abajo)
+
     playCtx.fillStyle = "#2d5bff";
+
     playCtx.beginPath();
+
     playCtx.arc(300, 280, 22, 0, Math.PI*2);
+
     playCtx.fill();
+
     playCtx.fillStyle = "#fff";
+
     playCtx.font = "bold 12px 'Anton'";
+
     playCtx.textAlign = "center";
+
     playCtx.fillText("VOS", 300, 284);
 
     // Defensor (Cayendo)
+
     playCtx.fillStyle = "#ff2b4d";
+
     playCtx.beginPath();
+
     playCtx.arc(300, defY, 24, 0, Math.PI*2);
+
     playCtx.fill();
 
     if(defY > 340){
+
       active = false;
+
       endMinigame('fail', '¡DERRIBADO!', 'Te pasaron por arriba. Reacción demasiado lenta.', {antifutbol:3, lesionado:2});
+
       return;
+
     }
 
     gameAnimId = requestAnimationFrame(loop);
+
   }
 
   function handleDodge(){
+
     if(!active) return;
+
     active = false;
 
     if(defY >= 200 && defY <= 260){
+
       endMinigame('perfect', '¡GAMBETA PERFECTA!', 'Dejaste al defensor pagando en el piso.', {estrella:4, showman:2});
+
     } else if(defY < 200){
+
       endMinigame('fail', '¡AMAGO PREMATURO!', 'Te regalaste antes de tiempo. El defensor te adivinó.', {picaymuere:3, nuncadefine:2});
+
     } else {
+
       endMinigame('fail', '¡DERRIBADO!', 'Te barrieron con pelota y todo.', {antifutbol:2, lesionado:2});
+
     }
+
   }
 
   playCanvas.addEventListener('pointerdown', handleDodge);
+
   loop();
+
 }
 
 /* ========================================================
+
    MINIJUEGO 3: REFLEJOS EN EL ÁREA (Grid Reflex)
-   ======================================================== */
+
+   \======================================================== */
+
 function runReflexGame(){
+
   const canvas = document.getElementById('mgCanvas');
   const newCanvas = canvas.cloneNode(true);
   canvas.parentNode.replaceChild(newCanvas, canvas);
+
   const playCanvas = document.getElementById('mgCanvas');
   const playCtx = playCanvas.getContext('2d');
 
+  // Diseño accesible: objetivos grandes, una sola pelota a la vez
+  // y 900 ms para reaccionar. La dificultad está en localizarla,
+  // no en exigir reflejos sobrehumanos.
   const grid = [
-    {x:150, y:90}, {x:300, y:90}, {x:450, y:90},
-    {x:150, y:170}, {x:300, y:170}, {x:450, y:170},
-    {x:150, y:250}, {x:300, y:250}, {x:450, y:250}
+    {x:110, y:90},  {x:300, y:90},  {x:490, y:90},
+    {x:110, y:170}, {x:300, y:170}, {x:490, y:170},
+    {x:110, y:250}, {x:300, y:250}, {x:490, y:250}
   ];
 
+  const totalTargets = 5;
+  const targetRadius = 38;
+  const targetTime = 900;
+  const gapTime = 300;
+
   let hits = 0;
-  let totalTargets = 5;
-  let currentTargetIndex = -1;
-  let targetActive = false;
   let count = 0;
+  let currentTarget = null;
+  let targetActive = false;
   let active = true;
+  let targetTimer = null;
+  let nextTimer = null;
+
+  function drawField(){
+    playCtx.clearRect(0,0,playCanvas.width,playCanvas.height);
+    playCtx.fillStyle = '#0a1122';
+    playCtx.fillRect(0,0,playCanvas.width,playCanvas.height);
+
+    // Área simplificada
+    playCtx.strokeStyle = '#1b274c';
+    playCtx.lineWidth = 3;
+    playCtx.strokeRect(70,55,460,230);
+    playCtx.beginPath();
+    playCtx.arc(300,170,55,0,Math.PI*2);
+    playCtx.stroke();
+
+    playCtx.fillStyle = '#7684a8';
+    playCtx.font = '700 14px Arial';
+    playCtx.textAlign = 'center';
+    playCtx.fillText(`BALÓN ${count}/${totalTargets}`, 300, 25);
+  }
+
+  function finish(){
+    active = false;
+    targetActive = false;
+    clearTimeout(targetTimer);
+    clearTimeout(nextTimer);
+
+    if(hits >= 4){
+      endMinigame(
+        'perfect',
+        '¡REFLEJOS DE DELANTERO!',
+        `Reaccionaste a ${hits}/${totalTargets} balones. Buena lectura del área y reflejos de élite.`,
+        {estrella:4, arquero:2}
+      );
+    } else if(hits >= 2){
+      endMinigame(
+        'good',
+        'REFLEJOS ACEPTABLES',
+        `Atrapaste ${hits}/${totalTargets}. Reaccionás bien, pero todavía podés anticiparte mejor.`,
+        {picaymuere:2, estrella:1}
+      );
+    } else {
+      endMinigame(
+        'fail',
+        '¡DORMIDO EN EL ÁREA!',
+        `Solo atrapaste ${hits}/${totalTargets}. Mirá la pelota antes de pensar en el remate.`,
+        {comebanco:3, pateaparaelotrolado:2}
+      );
+    }
+  }
 
   function nextTarget(){
+    if(!active) return;
+
     if(count >= totalTargets){
-      active = false;
-      if(hits === 5){
-        endMinigame('perfect', '¡REFLEJOS ABSOLUTOS!', 'Atrapaste los 5 balones relámpago. Visión sobrehumana.', {estrella:4, arquero:2});
-      } else if(hits >= 3){
-        endMinigame('good', 'REACCIÓN MEDIOCRE', `Atrapaste ${hits}/5. Falta velocidad de reacción.`, {picaymuere:2, malperdedor:1});
-      } else {
-        endMinigame('fail', '¡DORMIDO EN EL ÁREA!', `Solo tocaste ${hits}/5. Parecés de madera.`, {comebanco:3, pateaparaelotrolado:3});
-      }
+      finish();
       return;
     }
 
     count++;
-    currentTargetIndex = Math.floor(Math.random() * grid.length);
     targetActive = true;
 
-    // Render Target
-    playCtx.clearRect(0,0,playCanvas.width,playCanvas.height);
-    playCtx.fillStyle = "#0a1122";
-    playCtx.fillRect(0,0,playCanvas.width,playCanvas.height);
+    // Evitar repetir exactamente la misma posición dos veces seguidas.
+    let candidate;
+    do {
+      candidate = grid[Math.floor(Math.random() * grid.length)];
+    } while(currentTarget && candidate.x === currentTarget.x && candidate.y === currentTarget.y);
+    currentTarget = candidate;
 
-    // Dibujar todos los puntos
-    grid.forEach((pt, i) => {
-      playCtx.strokeStyle = "#1b274c";
-      playCtx.lineWidth = 2;
-      playCtx.beginPath();
-      playCtx.arc(pt.x, pt.y, 28, 0, Math.PI*2);
-      playCtx.stroke();
-    });
+    drawField();
 
-    // Dibujar el activo
-    const pt = grid[currentTargetIndex];
-    playCtx.fillStyle = "#ff2b4d";
+    // Objetivo grande y claramente visible.
+    playCtx.fillStyle = '#ff2b4d';
     playCtx.beginPath();
-    playCtx.arc(pt.x, pt.y, 28, 0, Math.PI*2);
+    playCtx.arc(currentTarget.x,currentTarget.y,targetRadius,0,Math.PI*2);
     playCtx.fill();
-    playCtx.strokeStyle = "#4ff0ff";
-    playCtx.lineWidth = 4;
+
+    playCtx.strokeStyle = '#4ff0ff';
+    playCtx.lineWidth = 5;
     playCtx.stroke();
 
-    // Tiempo de vida corto (220ms)
-    setTimeout(() => {
+    playCtx.fillStyle = '#eef2ff';
+    playCtx.font = '800 16px Arial';
+    playCtx.textAlign = 'center';
+    playCtx.fillText('¡TOCÁ!', currentTarget.x, currentTarget.y + 6);
+
+    // 900 ms: suficientemente rápido para ser un reto,
+    // pero razonable para una persona con mouse o pantalla táctil.
+    targetTimer = setTimeout(() => {
+      if(!active) return;
       targetActive = false;
-      playCtx.clearRect(0,0,playCanvas.width,playCanvas.height);
-      setTimeout(nextTarget, 200);
-    }, 220);
+      drawField();
+      nextTimer = setTimeout(nextTarget, gapTime);
+    }, targetTime);
   }
 
   playCanvas.addEventListener('pointerdown', (e) => {
-    if(!active || !targetActive) return;
+    if(!active || !targetActive || !currentTarget) return;
+
     const rect = playCanvas.getBoundingClientRect();
     const clickX = (e.clientX - rect.left) * (playCanvas.width / rect.width);
     const clickY = (e.clientY - rect.top) * (playCanvas.height / rect.height);
 
-    const pt = grid[currentTargetIndex];
-    if(Math.hypot(clickX - pt.x, clickY - pt.y) <= 35){
+    if(Math.hypot(clickX - currentTarget.x, clickY - currentTarget.y) <= targetRadius + 10){
       hits++;
       targetActive = false;
-      playCtx.fillStyle = "#4ff0ff";
+      clearTimeout(targetTimer);
+
+      // Feedback de acierto y avance inmediato.
+      playCtx.fillStyle = '#4ff0ff';
       playCtx.beginPath();
-      playCtx.arc(pt.x, pt.y, 32, 0, Math.PI*2);
+      playCtx.arc(currentTarget.x,currentTarget.y,targetRadius + 6,0,Math.PI*2);
       playCtx.fill();
+      playCtx.fillStyle = '#05070c';
+      playCtx.font = '800 16px Arial';
+      playCtx.textAlign = 'center';
+      playCtx.fillText('¡BIEN!', currentTarget.x, currentTarget.y + 6);
+
+      if(count >= totalTargets){
+        nextTimer = setTimeout(finish, 350);
+      } else {
+        nextTimer = setTimeout(nextTarget, gapTime);
+      }
+    }
+  });
+
+  drawField();
+  nextTarget();
+
+}
+
+/* ========================================================
+
+   MINIJUEGO 4: SOBRECARGA DE STAMINA (Tap Rapid)
+
+   \======================================================== */
+
+function runStaminaGame(){
+
+  const canvas = document.getElementById('mgCanvas');
+
+  const newCanvas = canvas.cloneNode(true);
+
+  canvas.parentNode.replaceChild(newCanvas, canvas);
+
+  const playCanvas = document.getElementById('mgCanvas');
+
+  const playCtx = playCanvas.getContext('2d');
+
+  let gauge = 50;
+
+  let active = true;
+
+  let totalTime = 3.5; // segundos
+
+  let startTime = Date.now();
+
+  let gaugeSum = 0;
+
+  let samples = 0;
+
+  function loop(){
+
+    if(!active) return;
+
+    const elapsed = (Date.now() - startTime) / 1000;
+
+    const remaining = Math.max(0, totalTime - elapsed);
+
+    // Vaciar barra
+
+    gauge = Math.max(0, gauge - 1.15);
+
+    gaugeSum += gauge;
+
+    samples++;
+
+    playCtx.clearRect(0,0,playCanvas.width,playCanvas.height);
+
+    playCtx.fillStyle = "#070c18";
+
+    playCtx.fillRect(0,0,playCanvas.width,playCanvas.height);
+
+    // Titulo e instrucciones
+
+    playCtx.fillStyle = "#fff";
+
+    playCtx.font = "bold 18px 'Anton'";
+
+    playCtx.textAlign = "center";
+
+    playCtx.fillText("¡TOCÁ/CLICKÉA REPETIDAMENTE SIN PARAR!", 300, 50);
+
+    playCtx.fillStyle = "#ff2b4d";
+
+    playCtx.font = "bold 28px 'Barlow Condensed'";
+
+    playCtx.fillText(`${remaining.toFixed(1)}s`, 300, 90);
+
+    // Barra container
+
+    playCtx.strokeStyle = "#232c47";
+
+    playCtx.lineWidth = 4;
+
+    playCtx.strokeRect(80, 140, 440, 50);
+
+    // Zona Élite (>85%)
+
+    playCtx.fillStyle = "rgba(255, 206, 61, 0.2)";
+
+    playCtx.fillRect(80 + (440*0.85), 140, 440*0.15, 50);
+
+    // Barra Fill
+
+    const fillW = (gauge / 100) * 440;
+
+    playCtx.fillStyle = gauge >= 85 ? "#ffce3d" : "#2d5bff";
+
+    playCtx.fillRect(80, 140, fillW, 50);
+
+    if(remaining <= 0){
+
+      active = false;
+
+      const avgGauge = gaugeSum / Math.max(1, samples);
+
+      if(avgGauge >= 82){
+
+        endMinigame('perfect', '¡RESISTENCIA IMPACABLE!', 'Resististe la presión en la Zona Élite. Pulmones de acero.', {estrella:4, burro:2});
+
+      } else if(avgGauge >= 48){
+
+        endMinigame('good', 'AGOTADO', 'Te mantuviste con lo justo. Te faltó resto físico.', {picaymuere:3, comebanco:1});
+
+      } else {
+
+        endMinigame('fail', '¡COLAPSO FÍSICO!', 'Se te vació el tanque a mitad de camino.', {lesionado:3, comebanco:2});
+
+      }
+
+      return;
+
+    }
+
+    gameAnimId = requestAnimationFrame(loop);
+
+  }
+
+  playCanvas.addEventListener('pointerdown', () => {
+
+    if(!active) return;
+
+    gauge = Math.min(100, gauge + 7.5);
+
+  });
+
+  loop();
+
+}
+
+/* ========================================================
+   MINIJUEGO 5: ZONA DE DEFINICIÓN (Precision)
+   ======================================================== */
+function runPrecisionGame(){
+
+  const canvas = document.getElementById('mgCanvas');
+  const newCanvas = canvas.cloneNode(true);
+  canvas.parentNode.replaceChild(newCanvas, canvas);
+
+  const playCanvas = document.getElementById('mgCanvas');
+  const playCtx = playCanvas.getContext('2d');
+  let active = true;
+  let hits = 0;
+  let attempts = 0;
+  const maxAttempts = 5;
+  let target = {x:300,y:150};
+  let targetTimer = null;
+
+  function draw(){
+    if(!active) return;
+    playCtx.clearRect(0,0,playCanvas.width,playCanvas.height);
+    playCtx.fillStyle = '#081022';
+    playCtx.fillRect(0,0,playCanvas.width,playCanvas.height);
+
+    playCtx.strokeStyle = '#4ff0ff';
+    playCtx.lineWidth = 5;
+    playCtx.strokeRect(90,55,420,225);
+
+    playCtx.strokeStyle = 'rgba(79,240,255,.15)';
+    playCtx.lineWidth = 1;
+    for(let x=90;x<=510;x+=35){ playCtx.beginPath(); playCtx.moveTo(x,55); playCtx.lineTo(x,280); playCtx.stroke(); }
+    for(let y=55;y<=280;y+=35){ playCtx.beginPath(); playCtx.moveTo(90,y); playCtx.lineTo(510,y); playCtx.stroke(); }
+
+    playCtx.fillStyle = 'rgba(255,43,77,.30)';
+    playCtx.beginPath(); playCtx.arc(target.x,target.y,25,0,Math.PI*2); playCtx.fill();
+    playCtx.strokeStyle = '#ff2b4d';
+    playCtx.lineWidth = 3;
+    playCtx.stroke();
+
+    playCtx.fillStyle = '#fff';
+    playCtx.font = "bold 18px 'Barlow Condensed'";
+    playCtx.textAlign = 'center';
+    playCtx.fillText(`PRECISIÓN: ${hits}/${maxAttempts}`,300,325);
+  }
+
+  function nextTarget(){
+    if(!active) return;
+    target.x = 125 + Math.random()*350;
+    target.y = 85 + Math.random()*155;
+    draw();
+    clearTimeout(targetTimer);
+    targetTimer = setTimeout(()=>{
+      if(!active) return;
+      attempts++;
+      if(attempts>=maxAttempts) finish();
+      else nextTarget();
+    },650);
+  }
+
+  function finish(){
+    if(!active) return;
+    active=false;
+    clearTimeout(targetTimer);
+    if(hits>=4){
+      endMinigame('perfect','¡DEFINICIÓN QUIRÚRGICA!',`Acertaste ${hits}/5. Precisión de delantero de élite.`,{estrella:4,pateademasiado:1});
+    } else if(hits>=2){
+      endMinigame('good','BUEN OJO',`Acertaste ${hits}/5. Hay talento, pero todavía falta sangre fría.`,{showman:2,estrella:1});
+    } else {
+      endMinigame('fail','¡PIFIA TOTAL!',`Solo acertaste ${hits}/5. El arco parecía tener imán para tus tiros.`,{pateademasiado:2,pateaparaelotrolado:3});
+    }
+  }
+
+  playCanvas.addEventListener('pointerdown',(e)=>{
+    if(!active) return;
+    const rect=playCanvas.getBoundingClientRect();
+    const x=(e.clientX-rect.left)*(playCanvas.width/rect.width);
+    const y=(e.clientY-rect.top)*(playCanvas.height/rect.height);
+    if(Math.hypot(x-target.x,y-target.y)<=32){
+      hits++; attempts++;
+      playCtx.fillStyle='#4ff0ff';
+      playCtx.beginPath(); playCtx.arc(target.x,target.y,34,0,Math.PI*2); playCtx.fill();
+      if(attempts>=maxAttempts) finish();
+      else setTimeout(nextTarget,120);
     }
   });
 
   nextTarget();
 }
 
-/* ========================================================
-   MINIJUEGO 4: SOBRECARGA DE STAMINA (Tap Rapid)
-   ======================================================== */
-function runStaminaGame(){
-  const canvas = document.getElementById('mgCanvas');
-  const newCanvas = canvas.cloneNode(true);
-  canvas.parentNode.replaceChild(newCanvas, canvas);
-  const playCanvas = document.getElementById('mgCanvas');
-  const playCtx = playCanvas.getContext('2d');
-
-  let gauge = 50;
-  let active = true;
-  let totalTime = 3.5; // segundos
-  let startTime = Date.now();
-  let gaugeSum = 0;
-  let samples = 0;
-
-  function loop(){
-    if(!active) return;
-    const elapsed = (Date.now() - startTime) / 1000;
-    const remaining = Math.max(0, totalTime - elapsed);
-
-    // Vaciar barra
-    gauge = Math.max(0, gauge - 1.15);
-
-    gaugeSum += gauge;
-    samples++;
-
-    playCtx.clearRect(0,0,playCanvas.width,playCanvas.height);
-    playCtx.fillStyle = "#070c18";
-    playCtx.fillRect(0,0,playCanvas.width,playCanvas.height);
-
-    // Titulo e instrucciones
-    playCtx.fillStyle = "#fff";
-    playCtx.font = "bold 18px 'Anton'";
-    playCtx.textAlign = "center";
-    playCtx.fillText("¡TOCÁ/CLICKÉA REPETIDAMENTE SIN PARAR!", 300, 50);
-
-    playCtx.fillStyle = "#ff2b4d";
-    playCtx.font = "bold 28px 'Barlow Condensed'";
-    playCtx.fillText(`${remaining.toFixed(1)}s`, 300, 90);
-
-    // Barra container
-    playCtx.strokeStyle = "#232c47";
-    playCtx.lineWidth = 4;
-    playCtx.strokeRect(80, 140, 440, 50);
-
-    // Zona Élite (>85%)
-    playCtx.fillStyle = "rgba(255, 206, 61, 0.2)";
-    playCtx.fillRect(80 + (440*0.85), 140, 440*0.15, 50);
-
-    // Barra Fill
-    const fillW = (gauge / 100) * 440;
-    playCtx.fillStyle = gauge >= 85 ? "#ffce3d" : "#2d5bff";
-    playCtx.fillRect(80, 140, fillW, 50);
-
-    if(remaining <= 0){
-      active = false;
-      const avgGauge = gaugeSum / Math.max(1, samples);
-
-      if(avgGauge >= 82){
-        endMinigame('perfect', '¡RESISTENCIA IMPACABLE!', 'Resististe la presión en la Zona Élite. Pulmones de acero.', {estrella:4, burro:2});
-      } else if(avgGauge >= 48){
-        endMinigame('good', 'AGOTADO', 'Te mantuviste con lo justo. Te faltó resto físico.', {picaymuere:3, comebanco:1});
-      } else {
-        endMinigame('fail', '¡COLAPSO FÍSICO!', 'Se te vació el tanque a mitad de camino.', {lesionado:3, comebanco:2});
-      }
-      return;
-    }
-
-    gameAnimId = requestAnimationFrame(loop);
-  }
-
-  playCanvas.addEventListener('pointerdown', () => {
-    if(!active) return;
-    gauge = Math.min(100, gauge + 7.5);
-  });
-
-  loop();
-}
-
 /* ============ RESULTADOS & REGLAS BLUE LOCK ============ */
+
 function showResult(){
+
   let best = Object.keys(scores)[0];
+
   Object.keys(scores).forEach(k => { if(scores[k] > scores[best]) best = k; });
 
   // REGLA BLUE LOCK IMPONENTE:
+
   // Para ser "El Delantero Estrella", NO ALCANZA con elegir respuestas egoístas.
+
   // Tenés que haber completado AL MENOS 3 MINIJUEGOS PERFECTOS.
+
   if(best === 'estrella' && perfectMinigames < 3){
+
     // Ego te castiga y te rebaja a "Patea Demasiado" o "Mal Perdedor"
+
     scores.estrella = Math.floor(scores.estrella * 0.2); // Penalización severa
+
     best = 'pateademasiado';
+
     Object.keys(scores).forEach(k => { if(k !== 'estrella' && scores[k] > scores[best]) best = k; });
+
   }
 
   const maxScore = scores[best];
+
   const tied = Object.keys(scores).filter(k => scores[k] === maxScore);
+
   if(tied.length > 1){ best = tied[Math.floor(Math.random()*tied.length)]; }
 
   const player = PLAYERS[best];
+
   document.getElementById('resName').textContent = player.name;
+
   document.getElementById('resName').className = 'result-name' + (best === 'estrella' ? ' legend' : '');
+
   document.getElementById('resBadge').textContent = player.badge;
+
   document.getElementById('resDesc').innerHTML = player.desc;
+
   document.getElementById('resRank').textContent = best === 'estrella' ? '★ PERFIL DE ÉLITE DETECTADO ★' : 'PERFIL DETECTADO';
 
   document.getElementById('mgPerfStat').textContent = `${perfectMinigames}/5 PERFECTOS`;
 
   let extraVerdict = "";
+
   if(perfectMinigames < 3 && scores.estrella > 0){
+
     extraVerdict = "<br><br><b>NOTA DE EGO:</b> Intentaste hacerte el egoísta con las palabras, pero en los minijuegos te temblaron las piernas. Un verdadero estrella ejecuta con precisión.";
+
   }
 
   document.getElementById('egoVerdict').innerHTML = '<b>EGO:</b> ' + player.verdict + extraVerdict;
 
   document.getElementById('meterPct').textContent = player.ego + '%';
+
   const fill = document.getElementById('meterFill');
+
   fill.style.width = '0%';
+
   setTimeout(() => { fill.style.width = player.ego + '%'; }, 100);
 
   renderRoster(best);
+
   showScreen('screen-result');
+
 }
 
 function renderRoster(current){
+
   const grid = document.getElementById('rosterGrid');
+
   grid.innerHTML = '';
+
   PLAYER_ORDER.forEach(key => {
+
     const div = document.createElement('div');
+
     div.className = 'roster-item' + (key === current ? ' current' : '');
+
     div.textContent = PLAYERS[key].name;
+
     grid.appendChild(div);
+
   });
+
 }
 
 function restartQuiz(){ startQuiz(); }
+
 function scrollToRoster(){ document.getElementById('roster').scrollIntoView({behavior:'smooth'}); }
+
 </script>
+
 </body>
+
 </html>
